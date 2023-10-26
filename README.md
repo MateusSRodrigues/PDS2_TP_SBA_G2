@@ -19,23 +19,23 @@ O sistema de Biblioteca Avançado é um sistema completo de gerenciamento de bib
 
 * Retirada de Livros Presencial: Funcionários podem emprestar livros fisicamente, verificar disponibilidade, identificar usuários e gerar recibos.
 
-*  Devolução de Livros Presencial: Funcionários podem receber devoluções, verificar datas, aplicar multas, atualizar status do livro e fornecer comprovantes de devolução.
+* Devolução de Livros Presencial: Funcionários podem receber devoluções, verificar datas, aplicar multas, atualizar status do livro e fornecer comprovantes de devolução.
 
 * Renovação de Empréstimo: Membros podem renovar empréstimos online, sujeito a regras de reserva.
 
-* Avaliação de Livros: Membros podem avaliar os livros, compartilhando opiniões e visualizando as classificações de outros membros.
+* Avaliação de Livros: Membros podem avaliar os livros, compartilhando e visualizando as classificações de outros membros.
 
 * Gerenciamento de Multas: Funcionários podem gerenciar multas, incluindo visualização, registro de pagamento e geração de relatórios.
-
-* Reserva de Salas de Estudo (Opcional): Membros podem reservar salas de estudo online.
 
 * Cadastro de Novos Livros: Funcionários podem cadastrar novos livros com informações detalhadas.
 
 * Cadastro de Usuário: Usuários podem se cadastrar, fazer login e pesquisar livros.
 
-* Cadastro de Professor (Opcional): Professores podem se registrar para acesso a recursos especiais.
+* Professor: Professores podem se registrar para acesso a recursos especiais.
 
-* Cadastro de Aluno (Opcional): Alunos podem se registrar para acesso a empréstimos e pesquisa.
+* Aluno: Alunos podem se registrar para acesso a empréstimos e pesquisa.
+  
+* Funcionario: Generia multas, rebe devolução de livros, renova emprestitmos, paga multas, da baixa no sistema do livro, registra condição do livro.
 
 * Multa: Sistema de multas por atraso na devolução de livros, com notificações, cálculo de multas, registro e bloqueio de privilégios.
 
