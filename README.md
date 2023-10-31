@@ -41,6 +41,9 @@ O sistema de Biblioteca Avançado é uma aplicação de software que abrange tod
 
 Este sistema visa simplificar e agilizar o gerenciamento de uma biblioteca, melhorar a experiência dos usuários e fornecer uma solução completa para as necessidades em constante evolução de bibliotecas modernas. A combinação de funcionalidades online e presenciais o torna uma ferramenta valiosa para qualquer instituição que deseje oferecer serviços de biblioteca mais eficientes e convenientes.
 
+##**User Stories**
+https://docs.google.com/document/d/1mkruYu_dgSMFSchUCw5HQvn-L3VfDcKsz3SXm98Ct_c/edit
+
  ## Pré-requisitos
   Para usar o sistema é preciso ter um compilador de C++ e makefile
   ## **Ferramentas**
