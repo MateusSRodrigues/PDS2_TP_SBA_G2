@@ -8,39 +8,38 @@
 
   Esse repositório tem por finalidade criar um **Sistema de Biblioteca**, em C++, para apresentação de um trabalho em grupo de "Programação e Desenvolvimento de Software II", da UFMG.
 
+## Problema
+  O sistema de Biblioteca Avançado visa abordar os desafios enfrentados por bibliotecas modernas e seus membros. Nas bibliotecas tradicionais, os processos de reserva, empréstimo e devolução de livros geralmente são manuais, consumindo tempo tanto dos membros quanto dos funcionários. Além disso, a gestão de multas e o acompanhamento do catálogo de livros podem ser complexos. À medida que as bibliotecas buscam modernizar e melhorar a experiência do usuário, o gerenciamento eficiente se torna essencial.
 
+  Este projeto se torna importante em um contexto onde a conveniência, eficiência e acessibilidade são essenciais. O sistema aborda as necessidades tanto de membros da biblioteca quanto de funcionários, proporcionando uma experiência aprimorada no processo de busca, reserva, retirada, devolução e avaliação de livros. Além disso, a funcionalidade de gerenciamento de multas e o opcional de reserva de salas de estudo atendem a uma ampla gama de requisitos das bibliotecas, tornando-o uma solução valiosa.
 
-## Resumo
-O sistema de Biblioteca Avançado é um sistema completo de gerenciamento de bibliotecas que atende às necessidades de membros da biblioteca e funcionários. Ele oferece diversas funcionalidades, incluindo:
+## Visão Geral da Solução
 
-* Reserva de Livros: Membros podem reservar livros online, verificar a disponibilidade e receber confirmações, além de serem lembrados da data de retirada.
+O sistema de Biblioteca Avançado é uma aplicação de software que abrange todas as operações-chave de uma biblioteca, tanto para membros quanto para funcionários. Sua estrutura geral compreende:
 
-* Retirada de Livros Online: Permite que membros retirem livros online, economizando tempo e oferecendo conveniência.
+* Cadastro de Usuário: Os membros da biblioteca, incluindo professores e alunos, podem se cadastrar e fazer login em suas contas. Isso permite que eles acessem serviços e informações personalizadas.
 
-* Retirada de Livros Presencial: Funcionários podem emprestar livros fisicamente, verificar disponibilidade, identificar usuários e gerar recibos.
+* Pesquisa de Livros: Os usuários podem pesquisar livros por título, autor, categoria ou palavra-chave, tornando a busca por materiais de leitura mais eficiente.
 
-* Devolução de Livros Presencial: Funcionários podem receber devoluções, verificar datas, aplicar multas, atualizar status do livro e fornecer comprovantes de devolução.
+* Reserva de Livros: Membros da biblioteca podem reservar livros online, verificando a disponibilidade, recebendo confirmações e lembranças das datas de retirada.
 
-* Renovação de Empréstimo: Membros podem renovar empréstimos online, sujeito a regras de reserva.
+* Retirada de Livros Online: Oferece a opção de retirar livros sem passar pelo balcão da biblioteca, economizando tempo.
 
-* Avaliação de Livros: Membros podem avaliar os livros, compartilhando e visualizando as classificações de outros membros.
+* Retirada de Livros Presencial: Funcionários podem gerenciar empréstimos presencialmente, verificar a disponibilidade, identificar usuários e gerar recibos.
 
-* Gerenciamento de Multas: Funcionários podem gerenciar multas, incluindo visualização, registro de pagamento e geração de relatórios.
+* Devolução de Livros Presencial: Funcionários podem receber devoluções, verificar datas, aplicar multas, atualizar o status do livro e fornecer comprovantes de devolução.
 
-* Cadastro de Novos Livros: Funcionários podem cadastrar novos livros com informações detalhadas.
+* Renovação de Empréstimo: Membros podem renovar empréstimos online, desde que não haja reservas pendentes.
 
-* Cadastro de Usuário: Usuários podem se cadastrar, fazer login e pesquisar livros.
+* Avaliação de Livros (Opcional): Membros podem atribuir classificações a livros e ver as classificações de outros membros ao pesquisar no catálogo.
 
-* Professor: Professores podem se registrar para acesso a recursos especiais.
+* Gerenciamento de Multas: Funcionários podem gerenciar multas, incluindo notificações, registro de pagamento e geração de relatórios.
 
-* Aluno: Alunos podem se registrar para acesso a empréstimos e pesquisa.
-  
-* Funcionario: Generia multas, rebe devolução de livros, renova emprestitmos, paga multas, da baixa no sistema do livro, registra condição do livro.
+* Reserva de Salas de Estudo (Opcional): Membros podem reservar salas de estudo online, com confirmações e opções de cancelamento.
 
-* Multa: Sistema de multas por atraso na devolução de livros, com notificações, cálculo de multas, registro e bloqueio de privilégios.
+* Cadastro de Novos Livros: Funcionários podem cadastrar novos livros com informações detalhadas, incluindo título, autor, editora, ISBN e disponibilidade inicial.
 
-O sistema é abrangente e atende às necessidades de gerenciamento de bibliotecas, oferecendo funcionalidades online e presenciais para membros e funcionários. Além disso, inclui recursos adicionais, como reserva de salas de estudo e a opção de cadastrar professores e alunos para serviços diferenciados. É uma solução completa para melhorar a eficiência e conveniência de uma biblioteca moderna.
-
+Este sistema visa simplificar e agilizar o gerenciamento de uma biblioteca, melhorar a experiência dos usuários e fornecer uma solução completa para as necessidades em constante evolução de bibliotecas modernas. A combinação de funcionalidades online e presenciais o torna uma ferramenta valiosa para qualquer instituição que deseje oferecer serviços de biblioteca mais eficientes e convenientes.
 
  ## Pré-requisitos
   Para usar o sistema é preciso ter um compilador de C++ e makefile
