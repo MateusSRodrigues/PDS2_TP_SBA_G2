@@ -6,7 +6,7 @@
  ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 <h1 align="center"> TP-FINAL-PDS2-Biblioteca </h1>
 
-  Esse repositório tem por finalidade criar um **Sistema de Biblioteca**, em C++, para apresentação de um trabalho em grupo de "Programação e Desenvolvimento de Software II", da UFMG.
+  Esse repositório tem por finalidade criar um **Sistema de Biblioteca Avançado**, em C++, para apresentação de um trabalho em grupo de "Programação e Desenvolvimento de Software II", da UFMG.
 
 ## Problema
   O sistema de Biblioteca Avançado visa abordar os desafios enfrentados por bibliotecas modernas e seus membros. Nas bibliotecas tradicionais, os processos de reserva, empréstimo e devolução de livros geralmente são manuais, consumindo tempo tanto dos membros quanto dos funcionários. Além disso, a gestão de multas e o acompanhamento do catálogo de livros podem ser complexos. À medida que as bibliotecas buscam modernizar e melhorar a experiência do usuário, o gerenciamento eficiente se torna essencial.
