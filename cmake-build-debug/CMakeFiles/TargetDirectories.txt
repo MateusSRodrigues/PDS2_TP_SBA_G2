@@ -1,0 +1,3 @@
+C:/Users/rayda/meus programas/entrega1/cmake-build-debug/CMakeFiles/entrega1.dir
+C:/Users/rayda/meus programas/entrega1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/rayda/meus programas/entrega1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
