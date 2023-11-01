@@ -7,6 +7,7 @@
 
 
 class Biblioteca {
+public:
  void emprestimo_livro();
  void renovar_emrestimo();
  void pesquisar_livro();
@@ -18,4 +19,3 @@ class Biblioteca {
 
 
 #endif //ENTREGA1_BIBLIOTECA_H
-
