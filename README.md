@@ -45,6 +45,10 @@ Este sistema visa simplificar e agilizar o gerenciamento de uma biblioteca, melh
  
  https://docs.google.com/document/d/1mkruYu_dgSMFSchUCw5HQvn-L3VfDcKsz3SXm98Ct_c/edit
 
+## Cartão CRC
+
+https://drive.google.com/file/d/1Cx5NkLtnsqqZ5Ss5SC3d4EOU6NWmZykV/view?usp=drive_link
+
  ## Pré-requisitos
   Para usar o sistema é preciso ter um compilador de C++ e makefile
   ## **Ferramentas**
