@@ -4,7 +4,7 @@
 #include <conio.h>
 #include <unistd.h>
 using namespace std;
-string pagar_multa(float valor_multa, vector<string>& opcao){
+string menu(float valor_multa, vector<string>& opcao){
         char n;
         int c;
         cout << "Sua multa atual esta no valor de " << valor_multa << " deseja pagar agora?" << endl;
@@ -53,7 +53,27 @@ string pagar_multa(float valor_multa, vector<string>& opcao){
 }
 int main() {
     vector <string> opca = {"sim", "nao","sempre"};
-    cout << pagar_multa(15,opca);
+    float num;
+    cin >> num;
+    cout << menu(num,opca);
+
+
+
+
+  //  std::list <int> lista = {1,2,3,4,5};
+   // std::list<int>::iterator it1;
+  //  for ( it1 = lista.begin(); it1 != lista.end(); it1++){
+    //    std::cout << *it1;
+   // }
+//std::cout<< " "<< std::endl;
+   // it1 = lista.begin();
+   // advance(it1,2);
+   // lista.erase(it1);
+
+   // for ( it1 = lista.begin(); it1 != lista.end(); it1++){
+  //      std::cout << *it1;
+   // }
+
 
     return 0;
 }
