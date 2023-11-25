@@ -4,17 +4,32 @@
 
 #ifndef ENTREGA1_BIBLIOTECA_H
 #define ENTREGA1_BIBLIOTECA_H
+#include "Livro.h"
+#include "Usuario.h"
+#include "Funcionario.h"
+#include <list>
+#include<vector>
 
+class Usuario;
+class Funcionario;
+
+string menu2(vector<string>& opcao,  vector<string>& cabecalho);
+PedidoReserva* menu3(vector<PedidoReserva*>& opcao,  vector<string>& cabecalho);
 
 class Biblioteca {
+private:
+    list<PedidoReserva*> pedidos_reserva;
+    list<PedidoReserva*> pedidos_renovar_emprestimo;
+    list<Usuario*> usuarios;
+    list<list<Livro*>> todos_livros;
+    list<Funcionario*> funcionarios;
+
 public:
- void emprestimo_livro();
- void renovar_emrestimo();
- void pesquisar_livro();
- void reservar_livro();
- void cancelar_reserva();
- void ver_multa();
- void pagar_multa();
+    bool pedido_renovar_emprestimo_efetuado(string nome_pedido, string matricula);
+    void criar_usuario(string n, string sen, string t, string id);
+    void criar_funcionario(string n, string sen, string t, string id, string turno);
+    void adicionar_livro(Livro* novo_livro );
+    void remover_livro(string id_livro);
 };
 
 
