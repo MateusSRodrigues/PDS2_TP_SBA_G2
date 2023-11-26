@@ -52,6 +52,57 @@ void Biblioteca::adicionar_livro(Livro* novo_livro) {
     };
     todos_livros.sort(compararNomeDoPrimeiroLivro);     /// Ordenar a lista de listas com base no comparador personalizado
 }
+void Biblioteca::criar_pedido_reserva(string matricula, Livro* l) {
+    int total_livros;
+    total_livros = get_usuario(matricula)->get_tamanho_emprestados() + get_usuario(matricula)->get_tamanho_reservados();
+    if(get_usuario(matricula)->get_valor_multa() == 0 && total_livros < 3 && !get_usuario(matricula)->algum_livro_vencido()){   /// se o usuario nao estiver devendo e nem tiver livrovencido.
+        if(verificar_existencia_pedido(matricula, l, pedidos_reserva)){    ///verifica se ja existe um pedido desse usuario para um exemplar desse livro.
+            cout <<"\033[1;31mVoce ja possui um pedido de reserva deste livro!\033[0m";
+            return;
+        }
+        PedidoReserva* pr = new PedidoReserva;
+        pr->identificacao_usuario = matricula;
+        pr->livro_pedido = l;
+        pedidos_reserva.push_back(pr);
+        ordenar_lista_pedidos("reservas");
+        // Obtendo a data atual
+        auto agora = chrono::system_clock::now();
+        time_t data_atual = std::chrono::system_clock::to_time_t(agora);
+        // Convertendo para struct tm para manipulação mais fácil
+        std::tm* data_pedido_ptr = std::localtime(&data_atual);
+        pr->data_pedido = *data_pedido_ptr; // atribui a data atual para data_pedido do pedido
+        cout << "\033[32mPedido de reserva realizado com sucesso!\033[0m" << endl;
+    }else if(get_usuario(matricula)->get_valor_multa() != 0){
+        cout << "\033[1;31mVoce nao pode reservar livros pois esta devendo a biblioteca, pague a multa e tente novamente.\033[0m" << endl;
+    }
+    else if( total_livros >= 3){
+        cout << "\033[1;31mVoce ja atingiu o numero maximo de livros (3), devolva um livro ou cancele uma reserva para poder pedir reserva de outro.\033[0m" << endl;
+    }else if(get_usuario(matricula)->algum_livro_vencido()){
+        cout << "\033[1;31mVoce nao pode reservar livros pois esta com um livro vencido, devolva ele e apos pagar a multa tente novamente.\033[0m" << endl;
+    }
+    return;
+}
+void Biblioteca::criar_pedido_renovar_emprestimo(string matricula, Livro *l) {
+    if(verificar_existencia_pedido(matricula, l, pedidos_renovar_emprestimo)){
+        cout <<"\033[1;31mVoce nao pode renovar emprestimo deste livro novamente!\033[0m";
+        return;
+    }else{
+        PedidoReserva *pr = new PedidoReserva;
+        pr->identificacao_usuario = matricula;
+        pr->livro_pedido = l;
+        // Obtendo a data atual
+        auto agora = chrono::system_clock::now();
+        time_t data_atual = std::chrono::system_clock::to_time_t(agora);
+        // Convertendo para struct tm para manipulação mais fácil
+        std::tm* data_pedido_ptr = std::localtime(&data_atual);
+        // atribui a data atual para data_pedido do pedido
+        pr->data_pedido = *data_pedido_ptr;
+        pedidos_renovar_emprestimo.push_back(pr);
+        ordenar_lista_pedidos("renovar emprestimo");
+        cout << "\033[32mPedido de renovacao de reserva do livro " << l->get_nome() << " efetuado com sucesso!\033[0m" << endl;
+        return;
+    }
+}
 void Biblioteca::remover_livro(string id_livro) {
     for (auto it_lista = todos_livros.begin(); it_lista != todos_livros.end(); ++it_lista) {
         for (auto it_livro = it_lista->begin(); it_livro != it_lista->end(); ++it_livro) {
