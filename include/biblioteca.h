@@ -28,6 +28,8 @@ public:
     bool pedido_renovar_emprestimo_efetuado(string nome_pedido, string matricula);
     void criar_usuario(string n, string sen, string t, string id);
     void criar_funcionario(string n, string sen, string t, string id, string turno);
+    void criar_pedido_reserva(string matricula, Livro *l);
+    void criar_pedido_renovar_emprestimo(string matricula, Livro *l);
     void adicionar_livro(Livro* novo_livro );
     void remover_livro(string id_livro);
 };
