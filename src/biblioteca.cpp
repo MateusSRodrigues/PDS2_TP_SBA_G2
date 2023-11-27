@@ -169,3 +169,26 @@ void Biblioteca::ordenar_lista_pedidos(string lista) {  /// lista = a "reservas"
         pedidos_renovar_emprestimo.sort(comparador);
     }
 }
+bool Biblioteca::verificar_existencia_pedido(string matricula, Livro* l, list<PedidoReserva*> lista_pedidos){
+    for ( auto& pedido : lista_pedidos) {                      ///verifica se ja existe um pedido desse usuario para um exemplar desse livro.
+        if(pedido->identificacao_usuario == matricula && pedido->livro_pedido->get_nome() == l->get_nome()){
+            return true;
+        }
+    }
+    return false;
+}
+void Biblioteca::ver_informacoes_livro() const {
+    string id_livro;
+    cout << "Insira a identificacao do livro que voce busca as informacoes: ";
+    cin >> id_livro;
+    if (id_livro.size() != 8 or !all_of(id_livro.begin(), id_livro.end(), [](char c) { return isdigit(c); })) {          // verifica se so tem numeros
+        throw invalid_argument("\033[1;31mA identificacao deve conter 8 digitos e apenas numeros.\033[0m");
+    }
+    for (const auto& lista : todos_livros) {
+        for (const auto& livro_ptr : lista) {
+            if (livro_ptr->get_id() == id_livro) {
+                livro_ptr->mostrar_informacoes();
+                return;
+            }
+        }
+    }
