@@ -144,3 +144,11 @@ Usuario* Biblioteca::get_usuario(string identificacao) {
     }
     return nullptr;
 }
+Funcionario* Biblioteca::get_funcionario(string identificacao){
+    for (const auto &funcionario: funcionarios) {
+        if(funcionario->get_identificacao() == identificacao){
+            return funcionario;
+        }
+    }
+    return nullptr;
+}
