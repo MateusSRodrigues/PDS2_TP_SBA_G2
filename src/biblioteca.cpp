@@ -118,3 +118,29 @@ void Biblioteca::remover_livro(string id_livro) {
             }
         }
     }
+    throw runtime_error("\033[1;31mLivro nao encontrado no acervo!\033[0m");
+}
+void Biblioteca::deletar_pedido_reserva(string identificaçao, string nome_livro) {
+    for ( auto& pedido :pedidos_reserva){
+        if(pedido->identificacao_usuario == identificaçao && pedido->livro_pedido->get_nome() == nome_livro){
+            pedidos_reserva.remove(pedido);
+            return;
+        }
+    }
+}
+void Biblioteca::deletar_pedido_renovar_emprestimo(string identificaçao, string nome_livro) {
+    for ( auto& pedido :pedidos_renovar_emprestimo){
+        if(pedido->identificacao_usuario == identificaçao && pedido->livro_pedido->get_nome() == nome_livro){
+            pedidos_renovar_emprestimo.remove(pedido);
+            return;
+        }
+    }
+}
+Usuario* Biblioteca::get_usuario(string identificacao) {
+    for (const auto &usuario: usuarios) {
+        if(usuario->get_identificacao() == identificacao){
+            return usuario;
+        }
+    }
+    return nullptr;
+}
