@@ -35,6 +35,8 @@ public:
     void deletar_pedido_reserva(string identificaçao, string nome_livro);
     void deletar_pedido_renovar_emprestimo(string identificaçao, string nome_livro);
     Usuario* get_usuario(string identificacao);
+    Funcionario* get_funcionario(string identificacao);
+
 };
 
 
