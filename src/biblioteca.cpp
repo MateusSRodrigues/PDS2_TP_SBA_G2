@@ -192,3 +192,5 @@ void Biblioteca::ver_informacoes_livro() const {
             }
         }
     }
+    throw runtime_error("\033[1;31mLivro nao encontrado!\033[0m");
+}
