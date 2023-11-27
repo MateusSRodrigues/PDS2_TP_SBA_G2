@@ -37,6 +37,8 @@ public:
     Usuario* get_usuario(string identificacao);
     Funcionario* get_funcionario(string identificacao);
     void ordenar_lista_pedidos(string lista); /// ordena a lista de reserva ou a de renovar reserva depedendo da string lista
+    static bool verificar_existencia_pedido(string matricula, Livro* l, list<PedidoReserva*> lista_pedidos);
+    void ver_informacoes_livro() const;
 
 
 };
