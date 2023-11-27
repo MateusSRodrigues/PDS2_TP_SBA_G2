@@ -3,9 +3,12 @@
 //
 #include <string>
 #include <iostream>
+#include <list>
+#include <chrono>
+#include <ctime>
 
-#ifndef LIVRO_H
-#define LIVRO_H
+#ifndef SISTEMA_BIBLIOTECA_AVANÇADA_LIVRO_H
+#define SISTEMA_BIBLIOTECA_AVANÇADA_LIVRO_H
 
 using namespace std;
 class Livro {
@@ -14,17 +17,38 @@ private:
     string autor;
     string numero_id;
     string estado_fisico;
-    int ano_publicacao;
+    string ano_publicacao;
+    string estado_emprestimo;
+    string link;
+    int numero_avaliacoes;
     int avaliacao;
-    int quantidade_livros;
+    tm data_reserva;
+    tm data_emprestimo;
+    tm data_vencimento;
 
 public:
-   //void diminuir_quantidade();
-   //void aumentar_quantidade();
+    Livro(string nome, string autor, string id, string ef, string ano);
+    string get_nome();
+    string get_autor();
+    string get_id();
+    string get_estado_fisico();
+    string get_ano_publicacao();
+    string get_estado_emprestimo();
+    string get_link();
+    int get_avaliacao();
+    tm* get_data_vencimento();
+    tm* get_data_reserva();
+    void set_link(string novo_link);
+    void set_data_reserva(tm data);
+    void set_estado_fisico(string novo_estado);
+    void set_estado_emprestimo(string novo_estado);
+    void mostrar_informacoes();
+    void receber_avaliacao(int valor);
+    void atribui_data_emprestimo();
+    void prolonga_data_devolucao();
+    void zerar_datas_livro();
 
-   //recebe um inteiro como avaliaçao do aluno e ja calcula a media e altera a a variavel "avaliacao"
-   void receber_avaliacao(int valor);
-
+    ~Livro();
 
 
 
