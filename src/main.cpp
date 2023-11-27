@@ -1,69 +1,197 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#include <conio.h>
 #include <unistd.h>
+#include <algorithm>
+#include <iomanip>
+#include "Biblioteca.h"
+#include "Funcionario.h"
+#include "conio.h"
 
-using namespace std;
-string menu(vector<string>& opcao,  vector<string>& cabecalho){
-        char n;
-        int c;
-        for (int i = 0; i < cabecalho.size(); i++) {
-            cout << cabecalho[i] << " ";
+void cadastrar(Biblioteca* b){
+        string nome, telefone, id, senha;
+        cout << "Nome: ";
+        cin >> nome;
+        cout << "Telefone: ";
+        cin >> telefone;
+        cout << "Id: ";
+        cin >> id;
+        cout << "Senha: ";
+        cin >> senha;
+        if (any_of(nome.begin(), nome.end(), [](char c) { return !isalpha(c); })) {            // Verifica se o nome contém apenas letras
+            throw invalid_argument("\033[1;31mO nome deve conter apenas letras.\033[0m");
         }
-        cout << endl << "============================"<< endl << "->";
-        for (int i = 0; i < opcao.size(); i++) {
-            cout << opcao[i] << endl;
+
+        if (telefone.size() != 11 || !all_of(telefone.begin(), telefone.end(), [](char c) { return isdigit(c); })){
+            throw invalid_argument("\033[1;31mO telefone deve ter 11 digitos e conter apenas numeros.\033[0m");
         }
-        cout << "###############################"<< endl << "###############################" << endl;
-        while (n = getch()) {
-            system("cls");
-            switch (n) {
-                case 'v':
-                    c++;              ///altera contador de click, desc a seta
-                    break;
 
-                case 'f':
-                    c--;              ///altera contador de click,  sub a seta
-                    break;
+        if (id.size() != 5 && id.size() != 7 && id.size() != 9) {
+            throw invalid_argument("\033[1;31mO ID deve ter 5, 7 ou 9 digitos.\033[0m");
+        }
+        if (!all_of(id.begin(), id.end(), [](char c) { return isdigit(c); })) {          // verifica se so tem numeros
+            throw invalid_argument("\033[1;31mA identificacao deve conter apenas numeros.\033[0m");
+        }
+        if (b->get_usuario(id) != nullptr or b->get_funcionario(id) != nullptr) {            // Verifica se o ID já existe na lista de usuários
+            throw invalid_argument("\033[1;31mEsta Identificacao ja esta em uso.\033[0m");
+        }
 
-                case 'x':             ///escolhe opçao
-                  if (c==0) {
-                      return opcao[0];
-                  }else
-                  return opcao[c % opcao.size()];
+        if (senha.size() < 4 || senha.size() > 8 || !all_of(senha.begin(), senha.end(), [](char c) {
+            return isalnum(c);
+        })) {   // Verifica o tamanho e se a senha contém apenas letras e números
+            throw invalid_argument("\033[1;31mA senha deve ter entre 4 e 8 caracteres alfanumericos.\033[0m");
+        }
 
-                    break;
+        if (id.size() == 5) {/// funcionario
+            string turno;
+            cout << "Turno de trabalho (manha, tarde ou noite): ";
+            cin >> turno;
+            if(turno != "manha" && turno != "tarde" && turno !="noite"){
+                throw invalid_argument("\033[1;31mturno invalido, permitido apenas \"manha\",\"tarde\" ou \"noite\".\033[0m");
             }
-
-            for (int i = 0; i < opcao.size(); i++) {        ///loop imprime a lista de opçoes
-
-                if (i == 0) {                           /// para i=0 limpa tela e impime cabeçalho
-                    for (int i = 0; i < cabecalho.size(); i++) {
-                        cout << cabecalho[i] << " ";
-                    }
-                    cout << endl << "============================"<< endl;
-                }
-                if (i == c % opcao.size()) {        /// calcula e imprime seta
-                    cout << "->";
-                    cout << opcao[i] << endl;
-                } else{                         /// imprime restante
-                    cout << opcao[i]<< endl;
-                }
-                if (i == opcao.size()-1) {
-                    cout << "###############################"<< endl << "###############################"<< endl;
-                }
+            b->criar_funcionario(nome, senha, telefone, id, turno);
+            cout << "\033[32mConta de funcionario criada com sucesso!\033[0m" << endl;
+        }
+        if (id.size() == 7 or id.size() == 9) { /// prof ou aluno.
+            b->criar_usuario(nome, senha, telefone, id);
+            if(id.size() == 9) {
+                cout << "\033[32mConta de usuario estudante criada com sucesso!\033[0m" << endl;
+            }else if (id.size() == 7){
+                cout << "\033[32mConta de usuario professor criada com sucesso!\033[0m" << endl;
             }
         }
-}
+};
+
+
 int main() {
-    float num;
-    cin >> num;
-    string s = to_string(num);
-    s.resize(s.size()-4);
-    vector <string> opca = {"sim", "nao","sempre"};
-    vector<string> cabec = {"Sua multa atual esta no valor de ", s,"deseja pagar agora?"};
-    cout << menu(opca, cabec);
-    return 0;
+    char click;
+    Biblioteca *b = new Biblioteca();
+    vector<string> cabecalho = {"Seja bem-vindo ao sistema de biblioteca avancado, para comecar basta entrar na sua conta, caso nao possua cadastro clique em \"Cadastrar\"."};
+    vector<string> opcoes = {"Entrar.", "Cadastrar."};
+    inicio:
+    b->atualizar_geral();
+    system("cls");
+    try {
+        string resposta = menu2(opcoes, cabecalho);
+    if (resposta == "Entrar.") {
+            string id, senha;
+            cout << "Id: ";
+            cin >> id;
+            cout << "Senha: ";
+            cin >> senha;
+            if (b->get_usuario(id) == nullptr && b->get_funcionario(id) == nullptr) {
+                throw runtime_error("\033[1;31mIdentificacao nao exite.\033[0m");
+            }
+            if ((b->get_usuario(id) != nullptr && senha != b->get_usuario(id)->get_senha()) or (b->get_funcionario(id) != nullptr &&senha != b->get_funcionario(id)->get_senha())) {  /// tratamento de excessao para caso n encontre o usuario n de erro no nullptr->get_senha.
+                throw invalid_argument("\033[1;31mA senha inserida esta errada! Tente novamente.\033[0m");
+            }
+            if (b->get_usuario(id) != nullptr) { /// se encontrar um usuario com esse id
+                if (id.size() == 7 or id.size() == 9) {   /// aluno/prof
+                    if (senha == b->get_usuario(id)->get_senha()) {
+                        b->get_usuario(id)->ler_avisos(b);
+                        vector<string> cabecalho = {"O que deseja fazer?"};
+                        vector<string> opcoes = {"Pagar multa.", "Ver minhas informacoes.", "Solicitar reserva livro.","Cancelar reserva.", "Obter link livro online.", "Solicitar renovacao emprestimo.","Sair."};
+                        escolha_usuario:
+                        try{
+                            system("cls");
+                            string resposta = menu2(opcoes, cabecalho);
+                            if (resposta == "Pagar multa.") {
+                                b->get_usuario(id)->pagar_multa();
+
+                            } else if (resposta == "Ver minhas informacoes.") {
+                                b->get_usuario(id)->mostrar_informacoes_de_cadastro();
+
+                            } else if (resposta == "Solicitar reserva livro.") {
+                                b->get_usuario(id)->reservar_livro(b);
+
+                            } else if (resposta == "Obter link livro online.") {
+                                b->get_usuario(id)->retirar_livro_online(b);
+
+                            } else if (resposta == "Cancelar reserva.") {
+                                b->get_usuario(id)->cancelar_reserva();
+
+                            } else if (resposta == "Solicitar renovacao emprestimo.") {
+                                b->get_usuario(id)->renovar_emprestimo(b);
+
+                            } else if (resposta == "Sair.") {
+                                goto inicio;
+                            }
+                        }catch (const exception &e) {
+                            cerr << e.what() << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        }
+                        cout << "aperte \"x\".";
+                        click = getch();
+                        goto escolha_usuario;
+                    }
+                }
+            }
+            if (b->get_funcionario(id) != nullptr) { /// se encontrar um funcionario com esse id.
+                if (id.size() == 5) { ///func
+                    if (senha == b->get_funcionario(id)->get_senha()) { /// se a senha pertence ao id colocado
+                        vector<string> cabecalho = {"O que deseja fazer?"};
+                        vector<string> opcoes = {"Ver minhas informacoes.", "Ver informacoes de um usuario.", "Cadastrar livro.",
+                                                 "Descadastrar livro.", "Ver informacoes livro.",
+                                                 "Ver pedidos de reserva.",
+                                                 "Ver pedidos de renovacao emprestimo.",
+                                                 "Dar baixa emprestimo.", "Dar baixa devolucao.", "Sair."};
+                        escolha_funcionario:
+                        try {
+                            system("cls");
+                            string resposta = menu2(opcoes, cabecalho);
+                            if (resposta == "Ver minhas informacoes.") {
+                                b->get_funcionario(id)->mostrar_informacoes_de_cadastro();
+
+                            } else if (resposta == "Ver informacoes de um usuario.") {
+                                b->get_funcionario(id)->mostrar_informacoes_de_cadastro(b);
+
+                            } else if (resposta == "Cadastrar livro.") {
+                                b->get_funcionario(id)->cadastrar_livro(b);
+
+
+                            } else if (resposta == "Descadastrar livro.") {
+                                b->get_funcionario(id)->descadastrar_livro(b);
+
+                            } else if (resposta == "Ver informacoes livro.") {
+                                b->ver_informacoes_livro();
+
+                            } else if (resposta == "Ver pedidos de reserva.") {
+                                b->get_funcionario(id)->dar_baixa_reserva(b->verificar_pedidos_reservas(), b);
+
+                            } else if (resposta == "Ver pedidos de renovacao emprestimo.") {
+                                b->get_funcionario(id)->dar_baixa_renovar_emprestimo(
+                                        b->verificar_pedidos_renovar_emprestimo(),b);
+
+                            } else if (resposta == "Dar baixa emprestimo.") {
+                                b->get_funcionario(id)->entregar_livro_presencialmente(b);
+
+                            } else if (resposta == "Dar baixa devolucao.") {
+                                b->get_funcionario(id)->aceitar_devolucao_livro_presencialmente(b);
+
+                            } else if (resposta == "Sair.") {
+                                goto inicio;
+                            }
+                        }catch (const exception &e) {
+                            cerr << e.what() << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        }
+                        cout << "aperte \"x\".";
+                        click = getch();
+                        goto escolha_funcionario;
+                    }
+                }
+            }
+    }if(resposta == "Cadastrar.") {    ///cadastrar
+            cadastrar(b);
+    }
+    } catch (const exception &e) {
+        cerr << "Atencao: " << e.what() << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    cout << "Aperte \"x\"";
+    click = getch();
+    goto inicio;
 }
+
 
