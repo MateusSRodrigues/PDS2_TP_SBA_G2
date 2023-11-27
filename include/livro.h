@@ -4,8 +4,8 @@
 #include <string>
 #include <iostream>
 
-#ifndef SISTEMA_BIBLIOTECA_AVANÇADA_LIVRO_H
-#define SISTEMA_BIBLIOTECA_AVANÇADA_LIVRO_H
+#ifndef LIVRO_H
+#define LIVRO_H
 
 using namespace std;
 class Livro {

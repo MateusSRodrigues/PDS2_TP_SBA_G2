@@ -2,8 +2,8 @@
 // Created by rayda on 31/10/2023.
 //
 
-#ifndef ENTREGA1_FUNCIONARIO_H
-#define ENTREGA1_FUNCIONARIO_H
+#ifndef FUNCIONARIO_H
+#define FUNCIONARIO_H
 
 
 #include "Pessoa.h"
