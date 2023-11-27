@@ -152,3 +152,20 @@ Funcionario* Biblioteca::get_funcionario(string identificacao){
     }
     return nullptr;
 }
+void Biblioteca::ordenar_lista_pedidos(string lista) {  /// lista = a "reservas" oiu "renovar reservas"
+    // Defina um comparador personalizado para a função sort
+    auto comparador = [](const PedidoReserva* pr1, const PedidoReserva* pr2) {
+        if (pr1->identificacao_usuario.size() != pr2->identificacao_usuario.size()) {           /// Comparação pelo tamanho da matrícula
+            return pr1->identificacao_usuario.size() < pr2->identificacao_usuario.size();
+        }
+        return pr1->livro_pedido->get_nome() < pr2->livro_pedido->get_nome();   /// Comparação dos nomes dos livros
+    };
+    if(lista == "reservas") {
+        // Ordena a lista de pedidos_reserva usando o comparador personalizado
+        pedidos_reserva.sort(comparador);
+    }
+    if(lista == "renovar emprestimo") {
+        // Ordena a lista de pedidos_reserva usando o comparador personalizado
+        pedidos_renovar_emprestimo.sort(comparador);
+    }
+}
