@@ -1,5 +1,24 @@
 //
-// Created by rayda on 31/10/2023.
+// Created by rayda on 02/11/2023.
 //
 
 #include "Pessoa.h"
+
+Pessoa::Pessoa(string n, string sen, string t, string id) : nome(n), senha(sen), telefone(t), identificacao(id) {
+}
+string Pessoa::get_nome() {
+    return nome;
+}
+string Pessoa::get_telefone() {
+    return telefone;
+}
+string Pessoa::get_senha() {
+    return senha;
+}
+string Pessoa::get_identificacao() {
+    return identificacao;
+}
+
+
+
+

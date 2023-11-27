@@ -5,8 +5,8 @@
 #include <iostream>
 #include "Livro.h"
 
-#ifndef ENTREGA1_PESSOA_H
-#define ENTREGA1_PESSOA_H
+#ifndef PESSOA_H
+#define PESSOA_H
 
 using namespace std;
 
@@ -18,9 +18,13 @@ private:
     string identificacao;
 
 public:
+    Pessoa(string n, string sen, string t, string id);
+    string get_nome();
+    string get_telefone();
+    string get_identificacao();
+    string get_senha();
+    virtual void mostrar_informacoes_de_cadastro() = 0;
     void avaliar_livro(Livro l);
-    void informacoes_de_cadastro();
-
 };
 
 
