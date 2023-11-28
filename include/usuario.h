@@ -1,12 +1,11 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
+#include "Pessoa.h"
+#include "Biblioteca.h"
 #include <vector>
 #include <string>
 #include <list>
-
-#include "pessoa.h"
-#include "biblioteca.h"
 
 class Biblioteca;
 
@@ -36,7 +35,7 @@ public:
     void cancelar_reserva();
     void retirar_livro();
     void retirar_livro_online(Biblioteca* b1);
-    void devolver_livro();
+    void devolver_livro(Biblioteca* b1);
     void renovar_emprestimo(Biblioteca* b1);
     void atualizar();
 };
