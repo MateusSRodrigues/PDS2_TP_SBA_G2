@@ -3,19 +3,29 @@
 //
 #include <iomanip>
 #include <unistd.h>
-#include "usuario.h"
-#include "biblioteca.h"
+#include <cmath>
+#include "Usuario.h"
+#include "Biblioteca.h"
 
 Usuario::Usuario(string n, string sen, string t, string id) : Pessoa(n, sen, t, id) {
 }
 void Usuario::mostrar_informacoes_de_cadastro() {
+    cout << setprecision(2) << fixed;
     cout << "###############################################" << endl << "\033[0;35mSuas informacoes.\033[0m" << endl << "-----------------------------" << endl;
     cout << "\033[0;35mNome: \033[0m \033[32m" << get_nome() << ".\033[0m" << endl << "\033[0;35mIdentificacao: \033[0m \033[32m" << get_identificacao() << ".\033[0m" << endl;
+    cout << "\033[0;35mTipo de usuario: \033[0m \033[32m";
+    if(get_identificacao().size() == 9){cout<< "Aluno.\033[0m" << endl;}
+    else if(get_identificacao().size() == 7){cout << "Professor.\033[0m" << endl;}
     cout << "\033[0;35mTelefone: \033[0m \033[32m" << get_telefone() << ".\033[0m" << endl << "\033[0;35mValor multa: \033[0m \033[31m" << valor_multa << ".\033[0m" << endl;
     cout << "\033[0;35mLivro(s) reservados:  \033[0m";
-    ver_livros_emprestados();
+    try{
+   ver_livros_reservados();
+        }catch (const exception &e) {
+       cerr << e.what() << endl;
+       cin.clear();
+    }
     cout << "\033[0;35mLivro(s) em posse:  \033[0m";
-    ver_livros_reservados();
+    ver_livros_emprestados();
     cout << "###############################################" << endl;
 }
 float Usuario::get_valor_multa() {
@@ -26,25 +36,22 @@ void Usuario::pagar_multa() {
     string valor = to_string(valor_multa);
     valor.resize(valor.size()-4);
     vector <string> cabec = {"Voce esta devendo ", valor, ", quer pagar agora?"};
-
     string resposta = menu2(opcao, cabec);
     if(resposta == "Sim."){
-        sim:
         float valor_a_pagar;
         cout << "deseja pagar quanto?" << endl;
         cin >> valor_a_pagar;
-
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            throw invalid_argument("\033[1;31mVoce inseriu um valor invalido.\033[0m");
+        }
         if(valor_a_pagar > valor_multa){
             throw invalid_argument("\033[1;31mVoce inseriu um valor acima do devido.\033[0m");
-        }
-
-        if (valor_a_pagar > valor_multa){
-            cout << "Insira um valor menor que a divida.";
-            goto sim;
         }else{
             valor_multa -= valor_a_pagar;
             cout.precision(2);
-            cout << fixed << "Voce pagou " << valor_a_pagar << ". Sua multa atual e de " << valor_multa;
+            cout << fixed << "Voce pagou " << valor_a_pagar << ". Sua multa atual e de " << valor_multa << endl;
         }
         return;
     }
@@ -77,7 +84,7 @@ void Usuario::ver_livros_reservados() {
         }
         cout << "\033[32m.\033[0m" << endl;
     } else {
-        throw runtime_error ("\033[32mNao ha livros reservados.\033[0m");
+        throw runtime_error ("\033[1;31mNao ha livros reservados!\033[0m");
     }
 }
 void Usuario::adicionar_aviso(string msg) {
@@ -91,7 +98,7 @@ void Usuario::ler_avisos(Biblioteca* b) {
         int nao_achou = 1000;
         if(aviso->find("que voce pediu para reservar nao existe mais nenhum exemplar disponivel") > nao_achou){     /// quando o find n encontra ele retorna uma valor alto, o aviso sempre tem menos de 1000 caracteres
             vector<string> opcao = {"Sim", "Nao"};
-            vector<string> cabecalho_apagar = {"\033[33maviso", to_string(i), ": \033[0m", *aviso, "\n","\033[33m-----------------------\033[0m","\n","Deseja apagar este aviso?"};
+            vector<string> cabecalho_apagar = {"\033[33maviso", to_string(i), ": \033[0m", *aviso, "\n","\033[33m-------------------------------------\033[0m","\n","Deseja apagar este aviso?"};
             string resposta = menu2(opcao, cabecalho_apagar);
             if(resposta == "Sim"){
                 avisos.erase(aviso);
@@ -120,7 +127,7 @@ string Usuario::mostrar_livros_reservados(string acao) {
     vector<std::string> lista_emprestados;
     vector<string> cabecalho_reservados = {"Deseja ", acao,  "de qual livro?"};
     if (livros_reservados.empty()) {
-        cout << "\033[1;31mNenhum livro encontrado!\033[0m"<< std::endl;
+        cout << "\033[1;31mNenhum livro encontrado!\033[0m" << endl;
         return "vazio";
     } else {
         for (const auto& livro : livros_reservados) {
@@ -133,7 +140,7 @@ string Usuario::mostrar_livros_em_uso(string acao) {
     vector<std::string> lista_em_uso;
     vector<string> cabecalho_em_uso = {"Deseja ", acao, " qual livro?"}; ///////////////
     if (livros_em_uso.empty()) {
-        cout << "\033[1;31mNenhum livro encontrado!\033[0m"<< endl;
+        cout << "\033[1;31mNenhum livro encontrado!\033[0m" << endl;
         return "vazio";
     } else {
         for (const auto& livro : livros_em_uso) {
@@ -154,8 +161,7 @@ void Usuario::reservar_livro(Biblioteca* b) {
         }
         for (auto &livro_ptr: livros_em_uso) {
             if (livro_escolhido->get_nome() == livro_ptr->get_nome()) {
-                cout << "\033[1;31mVoce nao pode reservar esse livro, pois ja pegou emprestado um de mesmo nome!\033[0m"
-                     << endl;
+                cout << "\033[1;31mVoce nao pode reservar esse livro, pois ja pegou emprestado um de mesmo nome!\033[0m" << endl;
                 return;
             }
         }
@@ -188,10 +194,7 @@ void Usuario::cancelar_reserva() {
     }
 }
 void Usuario::retirar_livro() {
-    string s = mostrar_livros_reservados("retirar ");                                   //////////////////////
-    if(s == "vazio"){ /// quando n tem livro reservado a funçao acima retorna "vazio"
-        throw runtime_error ("\033[1;31mNao ha livros reservados!\033[0m");
-    }                                                                                        //////////////////////
+    string s = mostrar_livros_reservados("retirar ");
     for (auto& livro_ptr : livros_reservados) {
         if (livro_ptr->get_nome() == s && livro_ptr->get_estado_emprestimo() == "Reservado") {
             livro_ptr->set_estado_emprestimo("Emprestado");
@@ -208,7 +211,7 @@ void Usuario::retirar_livro() {
         }
     }
 }
-void Usuario::devolver_livro() {  /// por grande parte essa funçao no funcionario ela deve retornar o livro e funcionario fazer td.
+void Usuario::devolver_livro(Biblioteca* b1) {  /// por grande parte essa funçao no funcionario ela deve retornar o livro e funcionario fazer td.
     if(livros_em_uso.empty()){
         throw runtime_error ("\033[1;31mNao ha livros em sua posse!\033[0m");
     }
@@ -224,15 +227,17 @@ void Usuario::devolver_livro() {  /// por grande parte essa funçao no funcionar
             time_t time1 = mktime(livro_ptr->get_data_vencimento());
             time_t time2 = mktime(data_atual_tm);
             // Calculando a diferença em segundos
-            chrono::seconds diff = chrono::seconds(abs(time1 - time2));
+            chrono::seconds diff = chrono::seconds(time2 - time1);
             // Convertendo a diferença para dias
             int dias = chrono::duration_cast<chrono::hours>(diff).count() / 24;
             // aplica multa
-            if(dias < 0){
+            if(dias > 0){
                 float valor_diaria = 0.3;
-                float multa_recebida = dias * valor_diaria;
+                float multa_recebida = trunc(dias) * valor_diaria;
                 valor_multa += multa_recebida;
-                string aviso = "Voce devolveu o livro " + to_string(dias) + " dias atrasado, recebeu uma multa de " + to_string(multa_recebida) + ".";
+                string str_multa = to_string(multa_recebida);
+                str_multa.resize(str_multa.size()-4);
+                string aviso = "Voce devolveu o livro " + to_string(dias) + " dias atrasado, recebeu uma multa de " + str_multa + ".";
                 adicionar_aviso(aviso);
                 livro_ptr->zerar_datas_livro();
             }
@@ -241,9 +246,11 @@ void Usuario::devolver_livro() {  /// por grande parte essa funçao no funcionar
             vector<string> cabecalho_nota = {"Qual a nota de 0 a 10 que o usuario da para o livro?"};
             livro_ptr->receber_avaliacao(stoi(menu2(opcao_avaliar,cabecalho_nota)));
             //avalia estado fisico livro
-            vector<string> opcao_ef ={"Pessimo", "Ruim.","Medio","Bom","Otimo"};
+            vector<string> opcao_ef ={"Pessimo", "Ruim","Medio","Bom","Otimo"};
             vector<string> cabecalho_estado = {"Qual o estado fisico deste livro?"};
             livro_ptr->set_estado_fisico(menu2(opcao_ef,cabecalho_estado));
+            b1->deletar_pedido_renovar_emprestimo(get_identificacao(), livro_ptr->get_nome());
+
             //deleta livro
             livros_em_uso.remove(livro_ptr);
             cout << "\033[32mlivro devolvido com sucesso!\033[0m" << endl;
@@ -257,7 +264,7 @@ void Usuario::renovar_emprestimo(Biblioteca* b1) {
         for (auto &livro_ptr: livros_em_uso) {
             if (livro_ptr->get_nome() == s) {
                 if (b1->pedido_renovar_emprestimo_efetuado(livro_ptr->get_nome(), this->get_identificacao())) {
-                    cout << "\033[1;31mVoce ja fez um pedido de renovacao deste livro.\033[0m";
+                    cout << "\033[1;31mVoce ja fez um pedido de renovacao deste livro.\033[0m" << endl;
                     return;
                 } else {
                     b1->criar_pedido_renovar_emprestimo(this->get_identificacao(), livro_ptr);
@@ -278,7 +285,7 @@ void Usuario::atualizar() {
             time_t time1 = mktime(livro_ptr->get_data_reserva());
             time_t time2 = mktime(data_atual_tm);
             // Calculando a diferença em segundos
-            chrono::seconds diff = chrono::seconds(abs(time2 - time1));
+            chrono::seconds diff = chrono::seconds(time2 - time1);
             // Convertendo a diferença para dias
             int dias = chrono::duration_cast<chrono::hours>(diff).count() / 24;
             if (dias > 3 ) {
@@ -294,20 +301,20 @@ void Usuario::atualizar() {
 }
 bool Usuario::algum_livro_vencido() {
     for (const auto &livro_ptr: livros_em_uso) {                /// retira dos livros reservados os que foram reservados ha mais de 3 dias
-            // Obtendo a data atual
-            chrono::system_clock::time_point now = chrono::system_clock::now();
-            time_t data_atual = chrono::system_clock::to_time_t(now);
-            tm *data_atual_tm = localtime(&data_atual);
-            // Convertendo ambas as datas para time_t para cálculos
-            time_t time1 = mktime(livro_ptr->get_data_vencimento());
-            time_t time2 = mktime(data_atual_tm);
-            // Calculando a diferença em segundos
-            chrono::seconds diff = chrono::seconds(abs(time2 - time1));
-            // Convertendo a diferença para dias
-            int dias = chrono::duration_cast<chrono::hours>(diff).count() / 24;
-            if (dias > 0) {
-                return true;
-            }
+        // Obtendo a data atual
+        chrono::system_clock::time_point now = chrono::system_clock::now();
+        time_t data_atual = chrono::system_clock::to_time_t(now);
+        tm *data_atual_tm = localtime(&data_atual);
+        // Convertendo ambas as datas para time_t para cálculos
+        time_t time1 = mktime(livro_ptr->get_data_vencimento());
+        time_t time2 = mktime(data_atual_tm);
+        // Calculando a diferença em segundos
+        chrono::seconds diff = chrono::seconds(time2 - time1);
+        // Convertendo a diferença para dias
+        int dias = chrono::duration_cast<chrono::hours>(diff).count() / 24;
+        if (dias > 0) {
+            return true;
+        }
     }
     return false;
 }
@@ -315,6 +322,8 @@ void Usuario::retirar_livro_online(Biblioteca *b1) {
     Livro* l = b1->mostrar_exemplar_todos_livros();
     if(l != nullptr) {
         cout << "link livro: " << l->get_nome() << ": " << l->get_link() << endl;
+    }else {
+        runtime_error("\033[1;31mNao ha livros no acervo!\033[0m");
     }
 }
 
