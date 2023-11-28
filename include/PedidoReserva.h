@@ -1,16 +1,13 @@
-//
-// Created by rayda on 16/11/2023.
-//
-
-#ifndef PROJETOBIBLIOTECA_PEDIDORESERVA_H
-#define PROJETOBIBLIOTECA_PEDIDORESERVA_H
-
+#ifndef PEDIDORESERVA_H
+#define PEDIDORESERVA_H
 
 #include <algorithm>
+
 #include "string"
-#include "Livro.h"
+#include "livro.h"
 
 using  namespace std;
+
 class PedidoReserva {
 public:
     string identificacao_usuario;

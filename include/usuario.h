@@ -1,14 +1,12 @@
-//
-// Created by rayda on 31/10/2023.
-//
+#ifndef USUARIO_H
+#define USUARIO_H
 
-#ifndef ENTREGA1_USUARIO_H
-#define ENTREGA1_USUARIO_H
-#include "Pessoa.h"
-#include "Biblioteca.h"
 #include <vector>
 #include <string>
 #include <list>
+
+#include "pessoa.h"
+#include "biblioteca.h"
 
 class Biblioteca;
 

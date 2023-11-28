@@ -3,6 +3,7 @@
 //
 
 #include "livro.h"
+
 Livro::Livro(string nome, string autor, string id, string ef, string ano) : nome_livro(nome),autor(autor),  numero_id(id), estado_fisico(ef), ano_publicacao(ano), avaliacao(10), estado_emprestimo("Disponivel"){
 
 }

@@ -2,8 +2,9 @@
 #include <unistd.h>
 #include <algorithm>
 #include <iomanip>
-#include "Biblioteca.h"
-#include "Funcionario.h"
+
+#include "biblioteca.h"
+#include "funcionario.h"
 #include "conio.h"
 
 void cadastrar(Biblioteca* b){

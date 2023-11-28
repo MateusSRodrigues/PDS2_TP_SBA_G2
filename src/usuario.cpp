@@ -3,8 +3,8 @@
 //
 #include <iomanip>
 #include <unistd.h>
-#include "Usuario.h"
-#include "Biblioteca.h"
+#include "usuario.h"
+#include "biblioteca.h"
 
 Usuario::Usuario(string n, string sen, string t, string id) : Pessoa(n, sen, t, id) {
 }
@@ -224,7 +224,7 @@ void Usuario::devolver_livro() {  /// por grande parte essa funçao no funcionar
             time_t time1 = mktime(livro_ptr->get_data_vencimento());
             time_t time2 = mktime(data_atual_tm);
             // Calculando a diferença em segundos
-            chrono::seconds diff = abs(chrono::seconds(time1 - time2));
+            chrono::seconds diff = chrono::seconds(abs(time1 - time2));
             // Convertendo a diferença para dias
             int dias = chrono::duration_cast<chrono::hours>(diff).count() / 24;
             // aplica multa
@@ -278,7 +278,7 @@ void Usuario::atualizar() {
             time_t time1 = mktime(livro_ptr->get_data_reserva());
             time_t time2 = mktime(data_atual_tm);
             // Calculando a diferença em segundos
-            chrono::seconds diff = abs(chrono::seconds(time2 - time1));
+            chrono::seconds diff = chrono::seconds(abs(time2 - time1));
             // Convertendo a diferença para dias
             int dias = chrono::duration_cast<chrono::hours>(diff).count() / 24;
             if (dias > 3 ) {
@@ -302,7 +302,7 @@ bool Usuario::algum_livro_vencido() {
             time_t time1 = mktime(livro_ptr->get_data_vencimento());
             time_t time2 = mktime(data_atual_tm);
             // Calculando a diferença em segundos
-            chrono::seconds diff = abs(chrono::seconds(time2 - time1));
+            chrono::seconds diff = chrono::seconds(abs(time2 - time1));
             // Convertendo a diferença para dias
             int dias = chrono::duration_cast<chrono::hours>(diff).count() / 24;
             if (dias > 0) {

@@ -1,10 +1,10 @@
 //
 // Created by rayda on 02/11/2023.
 //
-
 #include <unistd.h>
 #include <algorithm>
-#include "Funcionario.h"
+
+#include "funcionario.h"
 
 Funcionario::Funcionario(string n, string sen, string t, string id, string turno) : Pessoa(n, sen, t, id) ,turno_trabalho(turno) {
 }

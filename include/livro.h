@@ -1,16 +1,14 @@
-//
-// Created by rayda on 31/10/2023.
-//
+#ifndef LIVRO_H
+#define LIVRO_H
+
 #include <string>
 #include <iostream>
 #include <list>
 #include <chrono>
 #include <ctime>
 
-#ifndef SISTEMA_BIBLIOTECA_AVANÇADA_LIVRO_H
-#define SISTEMA_BIBLIOTECA_AVANÇADA_LIVRO_H
-
 using namespace std;
+
 class Livro {
 private:
     string nome_livro;
