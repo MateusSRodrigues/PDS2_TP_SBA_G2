@@ -2,77 +2,81 @@
 #include <unistd.h>
 #include <algorithm>
 #include <iomanip>
-
-#include "biblioteca.h"
-#include "funcionario.h"
+#include "Biblioteca.h"
+#include "Funcionario.h"
 #include "conio.h"
 
 void cadastrar(Biblioteca* b){
-        string nome, telefone, id, senha;
-        cout << "Nome: ";
-        cin >> nome;
-        cout << "Telefone: ";
-        cin >> telefone;
-        cout << "Id: ";
-        cin >> id;
-        cout << "Senha: ";
-        cin >> senha;
-        if (any_of(nome.begin(), nome.end(), [](char c) { return !isalpha(c); })) {            // Verifica se o nome contém apenas letras
-            throw invalid_argument("\033[1;31mO nome deve conter apenas letras.\033[0m");
-        }
+    string nome, telefone, id, senha;
+    cout << "Nome: ";
+    cin >> nome;
+    cout << "Telefone: ";
+    cin >> telefone;
+    cout << "Id: ";
+    cin >> id;
+    cout << "Senha: ";
+    cin >> senha;
+    if (any_of(nome.begin(), nome.end(), [](char c) { return !isalpha(c); })) {            // Verifica se o nome contém apenas letras
+        throw invalid_argument("\033[1;31mO nome deve conter apenas letras.\033[0m");
+    }
 
-        if (telefone.size() != 11 || !all_of(telefone.begin(), telefone.end(), [](char c) { return isdigit(c); })){
-            throw invalid_argument("\033[1;31mO telefone deve ter 11 digitos e conter apenas numeros.\033[0m");
-        }
+    if (telefone.size() != 11 || !all_of(telefone.begin(), telefone.end(), [](char c) { return isdigit(c); })){
+        throw invalid_argument("\033[1;31mO telefone deve ter 11 digitos e conter apenas numeros.\033[0m");
+    }
 
-        if (id.size() != 5 && id.size() != 7 && id.size() != 9) {
-            throw invalid_argument("\033[1;31mO ID deve ter 5, 7 ou 9 digitos.\033[0m");
-        }
-        if (!all_of(id.begin(), id.end(), [](char c) { return isdigit(c); })) {          // verifica se so tem numeros
-            throw invalid_argument("\033[1;31mA identificacao deve conter apenas numeros.\033[0m");
-        }
-        if (b->get_usuario(id) != nullptr or b->get_funcionario(id) != nullptr) {            // Verifica se o ID já existe na lista de usuários
-            throw invalid_argument("\033[1;31mEsta Identificacao ja esta em uso.\033[0m");
-        }
+    if (id.size() != 5 && id.size() != 7 && id.size() != 9) {
+        throw invalid_argument("\033[1;31mO ID deve ter 5, 7 ou 9 digitos.\033[0m");
+    }
+    if (!all_of(id.begin(), id.end(), [](char c) { return isdigit(c); })) {          // verifica se so tem numeros
+        throw invalid_argument("\033[1;31mA identificacao deve conter apenas numeros.\033[0m");
+    }
+    if (b->get_usuario(id) != nullptr or b->get_funcionario(id) != nullptr) {            // Verifica se o ID já existe na lista de usuários
+        throw invalid_argument("\033[1;31mEsta Identificacao ja esta em uso.\033[0m");
+    }
 
-        if (senha.size() < 4 || senha.size() > 8 || !all_of(senha.begin(), senha.end(), [](char c) {
-            return isalnum(c);
-        })) {   // Verifica o tamanho e se a senha contém apenas letras e números
-            throw invalid_argument("\033[1;31mA senha deve ter entre 4 e 8 caracteres alfanumericos.\033[0m");
-        }
+    if (senha.size() < 4 || senha.size() > 8 || !all_of(senha.begin(), senha.end(), [](char c) {
+        return isalnum(c);
+    })) {   // Verifica o tamanho e se a senha contém apenas letras e números
+        throw invalid_argument("\033[1;31mA senha deve ter entre 4 e 8 caracteres alfanumericos.\033[0m");
+    }
 
-        if (id.size() == 5) {/// funcionario
-            string turno;
-            cout << "Turno de trabalho (manha, tarde ou noite): ";
-            cin >> turno;
-            if(turno != "manha" && turno != "tarde" && turno !="noite"){
-                throw invalid_argument("\033[1;31mturno invalido, permitido apenas \"manha\",\"tarde\" ou \"noite\".\033[0m");
-            }
-            b->criar_funcionario(nome, senha, telefone, id, turno);
-            cout << "\033[32mConta de funcionario criada com sucesso!\033[0m" << endl;
+    if (id.size() == 5) {/// funcionario
+        string turno;
+        cout << "Turno de trabalho [1(manha), 2(tarde) ou 3(noite)]: ";
+        cin >> turno;
+        if(turno != "1" && turno != "2" && turno !="3"){
+            throw invalid_argument("\033[1;31mturno invalido, permitido apenas os numerais 1,2 e 3.\033[0m");
         }
-        if (id.size() == 7 or id.size() == 9) { /// prof ou aluno.
-            b->criar_usuario(nome, senha, telefone, id);
-            if(id.size() == 9) {
-                cout << "\033[32mConta de usuario estudante criada com sucesso!\033[0m" << endl;
-            }else if (id.size() == 7){
-                cout << "\033[32mConta de usuario professor criada com sucesso!\033[0m" << endl;
-            }
+        if(turno == "1"){ turno = "manha";}
+        else if(turno == "2"){turno = "tarde";}
+        else if(turno == "3"){turno = "noite";}
+        b->criar_funcionario(nome, senha, telefone, id, turno);
+        cout << "\033[32mConta de funcionario criada com sucesso!\033[0m" << endl;
+    }
+    if (id.size() == 7 or id.size() == 9) { /// prof ou aluno.
+        b->criar_usuario(nome, senha, telefone, id);
+        if(id.size() == 9) {
+            cout << "\033[32mConta de usuario estudante criada com sucesso!\033[0m" << endl;
+        }else if (id.size() == 7){
+            cout << "\033[32mConta de usuario professor criada com sucesso!\033[0m" << endl;
         }
+    }
 };
 
 
 int main() {
     char click;
+    string instrucoes = "\033[33mUse \"f\" para subir, \"v\" para descer e \"x\" para escolher.\n";
+    string divisao = "-----------------------------------------------------------------------------------------------------------\n\033[0m";
     Biblioteca *b = new Biblioteca();
-    vector<string> cabecalho = {"Seja bem-vindo ao sistema de biblioteca avancado, para comecar basta entrar na sua conta, caso nao possua cadastro clique em \"Cadastrar\"."};
+    vector<string> cabecalho = {instrucoes, divisao ,"Seja bem-vindo ao sistema de biblioteca avancado, para comecar basta entrar na sua conta, caso nao possua cadastro clique em \"Cadastrar\"."};
     vector<string> opcoes = {"Entrar.", "Cadastrar."};
     inicio:
     b->atualizar_geral();
     system("cls");
     try {
         string resposta = menu2(opcoes, cabecalho);
-    if (resposta == "Entrar.") {
+        if (resposta == "Entrar.") {
             string id, senha;
             cout << "Id: ";
             cin >> id;
@@ -88,7 +92,7 @@ int main() {
                 if (id.size() == 7 or id.size() == 9) {   /// aluno/prof
                     if (senha == b->get_usuario(id)->get_senha()) {
                         b->get_usuario(id)->ler_avisos(b);
-                        vector<string> cabecalho = {"O que deseja fazer?"};
+                        vector<string> cabecalho = {instrucoes, divisao ,"O que deseja fazer?"};
                         vector<string> opcoes = {"Pagar multa.", "Ver minhas informacoes.", "Solicitar reserva livro.","Cancelar reserva.", "Obter link livro online.", "Solicitar renovacao emprestimo.","Sair."};
                         escolha_usuario:
                         try{
@@ -118,7 +122,6 @@ int main() {
                         }catch (const exception &e) {
                             cerr << e.what() << endl;
                             cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         }
                         cout << "aperte \"x\".";
                         click = getch();
@@ -129,7 +132,7 @@ int main() {
             if (b->get_funcionario(id) != nullptr) { /// se encontrar um funcionario com esse id.
                 if (id.size() == 5) { ///func
                     if (senha == b->get_funcionario(id)->get_senha()) { /// se a senha pertence ao id colocado
-                        vector<string> cabecalho = {"O que deseja fazer?"};
+                        vector<string> cabecalho = {instrucoes, divisao ,"O que deseja fazer?"};
                         vector<string> opcoes = {"Ver minhas informacoes.", "Ver informacoes de um usuario.", "Cadastrar livro.",
                                                  "Descadastrar livro.", "Ver informacoes livro.",
                                                  "Ver pedidos de reserva.",
@@ -174,7 +177,6 @@ int main() {
                         }catch (const exception &e) {
                             cerr << e.what() << endl;
                             cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         }
                         cout << "aperte \"x\".";
                         click = getch();
@@ -182,9 +184,9 @@ int main() {
                     }
                 }
             }
-    }if(resposta == "Cadastrar.") {    ///cadastrar
+        }if(resposta == "Cadastrar.") {    ///cadastrar
             cadastrar(b);
-    }
+        }
     } catch (const exception &e) {
         cerr << "Atencao: " << e.what() << endl;
         cin.clear();
