@@ -79,7 +79,6 @@ void Livro::atribui_data_emprestimo() {
     data_vencimento = data_emprestimo;
     data_vencimento.tm_mon += 1;
     mktime(&data_vencimento); // Ajustando a data para corrigir o excesso de meses
-    datas();
 }
 void Livro::zerar_datas_livro() {
     data_vencimento = {};
@@ -98,7 +97,6 @@ void Livro::prolonga_data_devolucao() {
     time_t novo_vencimento = chrono::system_clock::to_time_t(vencimento_point);
     // Atualizando data_vencimento com o novo valor
     data_vencimento = *localtime(&novo_vencimento);
-    datas();
 
 
 }
@@ -106,10 +104,6 @@ Livro::~Livro() {
     ///cout << "livro " << nome_livro << " destruido!!" << endl;
 }
 
-void Livro::datas() {
-    cout << data_emprestimo.tm_mday<< "/" << data_emprestimo.tm_mon << endl;
-    cout << data_vencimento.tm_mday<< "/" << data_vencimento.tm_mon << endl;
-}
 
 
 
