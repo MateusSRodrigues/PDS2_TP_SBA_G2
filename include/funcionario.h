@@ -1,13 +1,16 @@
 #ifndef FUNCIONARIO_H
 #define FUNCIONARIO_H
 
-#include "pessoa.h"
-#include "usuario.h"
+#include "PedidoReserva.h"
+#include "Biblioteca.h"
+#include "Pessoa.h"
+#include "Usuario.h"
+#include <ctime>
 
 class Biblioteca;
 class Usuario;
-
 class Funcionario: public Pessoa {
+
 private:
     string turno_trabalho;
 public:
