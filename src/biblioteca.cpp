@@ -8,7 +8,6 @@
 #include "Biblioteca.h"
 
 string menu2(vector<string>& opcao,  vector<string>& cabecalho){
-    //oi
     char n;
     int c = 0;
     for (int i = 0; i < cabecalho.size(); i++) {
