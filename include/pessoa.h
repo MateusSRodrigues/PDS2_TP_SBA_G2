@@ -1,10 +1,8 @@
 #ifndef PESSOA_H
 #define PESSOA_H
-
 #include <string>
 #include <iostream>
-
-#include "livro.h"
+#include "Livro.h"
 
 using namespace std;
 
