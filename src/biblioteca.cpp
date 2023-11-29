@@ -6,12 +6,44 @@
 
 #include <vector>
 #include <unistd.h>
-#include <conio.h>
+#include <iostream>
+//#include <conio.h>
 
 #include "biblioteca.h"
 
+#ifdef _WIN32
+    // Código específico para Windows
+    #define CLEAR_SCREEN "cls"
+    #include <conio.h>
+    #define PEGCHAR _getch()
+#elif __linux__
+    // Código específico para Linux
+    #define CLEAR_SCREEN "clear"
+    #include <termios.h>
+    #define PEGCHAR getch()
+    char getch() {
+    char buf = 0;
+    struct termios old = {0};
+    if (tcgetattr(0, &old) < 0)
+        perror("tcsetattr()");
+    old.c_lflag &= ~ICANON;
+    old.c_lflag &= ~ECHO;
+    old.c_cc[VMIN] = 1;
+    old.c_cc[VTIME] = 0;
+    if (tcsetattr(0, TCSANOW, &old) < 0)
+        perror("tcsetattr ICANON");
+    if (read(0, &buf, 1) < 0)
+        perror("read()");
+    old.c_lflag |= ICANON;
+    old.c_lflag |= ECHO;
+    if (tcsetattr(0, TCSADRAIN, &old) < 0)
+        perror ("tcsetattr ~ICANON");
+    return buf;
+}
+#endif
+
 string menu2(vector<string>& opcao,  vector<string>& cabecalho){
-    char n;
+    //char n;
     int c = 0;
     for (int i = 0; i < cabecalho.size(); i++) {
         cout << cabecalho[i];
@@ -24,18 +56,19 @@ string menu2(vector<string>& opcao,  vector<string>& cabecalho){
             cout  <<  opcao[i]  << endl;
     }
     cout << "###############################"<< endl << "###############################" << endl;
-    while (n = getch()) {
-        system("cls");
+    while (auto n = PEGCHAR) {
+        system(CLEAR_SCREEN);
         switch (n) {
-            case 'v':
+            case 's':
                 c++;              ///altera contador de click, desc a seta
                 break;
 
-            case 'f':
+            case 'w':
                 c--;              ///altera contador de click,  sub a seta
                 break;
 
-            case 'x':             ///escolhe opçao
+            //case '/n':
+            case 'd':             ///escolhe opçao
                 if (c==0) {
                     return opcao[0];
                 }else
@@ -64,7 +97,7 @@ string menu2(vector<string>& opcao,  vector<string>& cabecalho){
 }
 ///++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 PedidoReserva* menu3(vector<PedidoReserva*>& opcao,  vector<string>& cabecalho, vector<int>& quant){
-    char n;
+    //char n;
     int c = 0;
     string disponibilidade;
     for (int i = 0; i < cabecalho.size(); i++) {
@@ -79,18 +112,19 @@ PedidoReserva* menu3(vector<PedidoReserva*>& opcao,  vector<string>& cabecalho, 
             cout  << "Usuario: " <<  opcao[i]->identificacao_usuario << " pediu reserva do livro: "<< opcao[i]->livro_pedido->get_nome()<< " - disponiveis: "<< quant[i] << endl;
     }
     cout << "###############################"<< endl << "###############################" << endl;
-    while (n = getch()) {
-        system("cls");
+    while (auto n = PEGCHAR) {
+        system(CLEAR_SCREEN);
         switch (n) {
-            case 'v':
+            case 's':
                 c++;              ///altera contador de click, desc a seta
                 break;
 
-            case 'f':
+            case 'w':
                 c--;              ///altera contador de click,  sub a seta
                 break;
 
-            case 'x':             ///escolhe opçao
+            //case '\n':
+            case 'd':            ///escolhe opçao
                 if (c==0) {
                     return opcao[0];
                 }else

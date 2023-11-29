@@ -5,7 +5,15 @@
 
 #include "biblioteca.h"
 #include "funcionario.h"
-#include "conio.h"
+//#include "conio.h"
+
+#ifdef _WIN32
+    // Código específico para Windows
+    #define CLEAR_SCREEN "cls"
+#elif __linux__
+    // Código específico para Linux
+    #define CLEAR_SCREEN "clear"
+#endif
 
 void cadastrar(Biblioteca* b){
         string nome, telefone, id, senha;
@@ -69,7 +77,7 @@ int main() {
     vector<string> opcoes = {"Entrar.", "Cadastrar."};
     inicio:
     b->atualizar_geral();
-    system("cls");
+    system(CLEAR_SCREEN);
     try {
         string resposta = menu2(opcoes, cabecalho);
     if (resposta == "Entrar.") {
@@ -121,7 +129,7 @@ int main() {
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         }
                         cout << "aperte \"x\".";
-                        click = getch();
+                        click = cin.get();
                         goto escolha_usuario;
                     }
                 }
@@ -177,7 +185,7 @@ int main() {
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         }
                         cout << "aperte \"x\".";
-                        click = getch();
+                        click = cin.get();
                         goto escolha_funcionario;
                     }
                 }
@@ -191,7 +199,7 @@ int main() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
     cout << "Aperte \"x\"";
-    click = getch();
+    click = cin.get();
     goto inicio;
 }
 
