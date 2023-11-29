@@ -1,13 +1,11 @@
-#ifndef PEDIDORESERVA_H
-#define PEDIDORESERVA_H
+#ifndef PROJETOBIBLIOTECA_PEDIDORESERVA_H
+#define PROJETOBIBLIOTECA_PEDIDORESERVA_H
+
 
 #include <algorithm>
-
-#include "string"
-#include "livro.h"
+#include "Livro.h"
 
 using  namespace std;
-
 class PedidoReserva {
 public:
     string identificacao_usuario;

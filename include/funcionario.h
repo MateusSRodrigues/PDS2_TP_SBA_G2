@@ -1,6 +1,8 @@
 #ifndef FUNCIONARIO_H
 #define FUNCIONARIO_H
 
+#include <ctime>
+
 #include "pessoa.h"
 #include "usuario.h"
 #include "pedidoreserva.h"

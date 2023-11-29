@@ -2,8 +2,8 @@
 // Created by rayda on 02/11/2023.
 //
 
-#include "livro.h"
-
+#include <unistd.h>
+#include "Livro.h"
 Livro::Livro(string nome, string autor, string id, string ef, string ano) : nome_livro(nome),autor(autor),  numero_id(id), estado_fisico(ef), ano_publicacao(ano), avaliacao(10), estado_emprestimo("Disponivel"){
 
 }
@@ -64,7 +64,7 @@ void Livro::mostrar_informacoes() {
         cout << "\033[0;35mData de emprestimo: \033[0m \033[32m" << data_emprestimo.tm_mday << "/" << data_emprestimo.tm_mon + 1 << "/" << data_emprestimo.tm_year << ".\033[0m" << endl;
         cout << "\033[0;35mDevolucao prevista: \033[0m \033[32m" << data_vencimento.tm_mday << "/" << data_vencimento.tm_mon + 1 << "/" << data_vencimento.tm_year << ".\033[0m" << endl;
     }
-    cout << "###############################################" << endl << "###############################################";
+    cout << "###############################################" << endl << "###############################################" << endl;
 }
 void Livro::receber_avaliacao(int valor) {
     numero_avaliacoes++;
@@ -72,18 +72,13 @@ void Livro::receber_avaliacao(int valor) {
 }
 void Livro::atribui_data_emprestimo() {
     // Obtendo a data atual
-    auto agora = chrono::system_clock::now();
-    time_t data_atual = std::chrono::system_clock::to_time_t(agora);
-    // Convertendo para struct tm para manipulação mais fácil
-    std::tm* data_emprestimo_ptr = std::localtime(&data_atual);
-    data_emprestimo = *data_emprestimo_ptr; // atribui a data atual para data_emprestimo
-    // Incrementando o mês para o próximo mês
-    data_emprestimo.tm_mon += 1;
-    // Convertendo para segundos para permitir manipulação de tempo
-    std::time_t data_proximo_mes = std::mktime(&data_emprestimo);
-    // Convertendo de volta para struct tm para data_vencimento
-    std::tm* data_vencimento_ptr = std::localtime(&data_proximo_mes);
-    data_vencimento = *data_vencimento_ptr; // atribui a data de vencimento para o próximo mês
+    std::time_t now = std::time(nullptr);
+    data_emprestimo = *std::localtime(&now); // data_emprestimo recebe a data atual
+
+    // Adicionando um mês à data atual para data_devolucao
+    data_vencimento = data_emprestimo;
+    data_vencimento.tm_mon += 1;
+    mktime(&data_vencimento); // Ajustando a data para corrigir o excesso de meses
 }
 void Livro::zerar_datas_livro() {
     data_vencimento = {};
@@ -92,7 +87,7 @@ void Livro::zerar_datas_livro() {
 }
 void Livro::prolonga_data_devolucao() {
 // Convertendo data_vencimento para time_t para cálculos
-    time_t time_vencimento = std::mktime(&data_vencimento);
+    time_t time_vencimento = mktime(&data_vencimento);
     // Adicionando 30 dias em segundos
     chrono::seconds trinta_dias(30 * 24 * 60 * 60);
     // Convertendo para chrono::system_clock::time_point para operações
@@ -102,10 +97,13 @@ void Livro::prolonga_data_devolucao() {
     time_t novo_vencimento = chrono::system_clock::to_time_t(vencimento_point);
     // Atualizando data_vencimento com o novo valor
     data_vencimento = *localtime(&novo_vencimento);
+
+
 }
 Livro::~Livro() {
     ///cout << "livro " << nome_livro << " destruido!!" << endl;
 }
+
 
 
 

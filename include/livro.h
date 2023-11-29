@@ -1,6 +1,5 @@
 #ifndef LIVRO_H
 #define LIVRO_H
-
 #include <string>
 #include <iostream>
 #include <list>
@@ -8,7 +7,6 @@
 #include <ctime>
 
 using namespace std;
-
 class Livro {
 private:
     string nome_livro;
@@ -45,6 +43,7 @@ public:
     void atribui_data_emprestimo();
     void prolonga_data_devolucao();
     void zerar_datas_livro();
+
 
     ~Livro();
 
