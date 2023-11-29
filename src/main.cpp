@@ -18,14 +18,14 @@
 void cadastrar(Biblioteca* b){
     string nome, telefone, id, senha;
     cout << "Nome: ";
-    cin >> nome;
+    getline(cin, nome);
     cout << "Telefone: ";
     cin >> telefone;
     cout << "Id: ";
     cin >> id;
     cout << "Senha: ";
     cin >> senha;
-    if (any_of(nome.begin(), nome.end(), [](char c) { return !isalpha(c); })) {            // Verifica se o nome contém apenas letras
+    if (any_of(nome.begin(), nome.end(), [](char c) { return !isalpha(c) && !isspace(c); })) {            // Verifica se o nome contém apenas letras
         throw invalid_argument("\033[1;31mO nome deve conter apenas letras.\033[0m");
     }
 
