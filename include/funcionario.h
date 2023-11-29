@@ -5,7 +5,7 @@
 
 #include "pessoa.h"
 #include "usuario.h"
-#include "PedidoReserva.h"
+#include "pedidoreserva.h"
 
 class Biblioteca;
 class Usuario;

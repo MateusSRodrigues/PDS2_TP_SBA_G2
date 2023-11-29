@@ -7,9 +7,9 @@
 #include "livro.h"
 #include "usuario.h"
 #include "funcionario.h"
-#include "PedidoReserva.h"
+#include "pedidoreserva.h"
 #include <list>
-#include<vector>
+#include <vector>
 
 class Usuario;
 class Funcionario;

@@ -35,7 +35,7 @@ void Funcionario::mostrar_informacoes_de_cadastro(Biblioteca *b1) {
 }
 void Funcionario::cadastrar_livro(Biblioteca* b1) {
     string nome, autor, ident, estado_fisico, ano;
-    int num_ef;
+    //int num_ef;
     cout << "Nome: ";
     cin >> nome;
     cout << "Autor:";
@@ -46,7 +46,7 @@ void Funcionario::cadastrar_livro(Biblioteca* b1) {
     cin >> estado_fisico;
     cout << "Ano publicacao: ";
     cin >> ano;
-    if (any_of(autor.begin(), autor.end(), [](char c) {return !isalpha(c);})) {            // Verifica se o nome contém apenas letras
+    if (any_of(autor.begin(), autor.end(), [](char c) {return !isalpha(c) && !isspace(c);})) {            // Verifica se o nome contém apenas letras
         throw invalid_argument("\033[1;31mO nome do autor deve conter apenas letras.\033[0m");
     }
     if (b1->verificar_existencia_livro(ident)) {
