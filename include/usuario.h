@@ -1,8 +1,8 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
-#include "Pessoa.h"
-#include "Biblioteca.h"
+#include "pessoa.h"
+#include "biblioteca.h"
 #include <vector>
 #include <string>
 #include <list>

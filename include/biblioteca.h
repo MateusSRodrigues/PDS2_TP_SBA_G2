@@ -4,9 +4,9 @@
 
 #ifndef BIBLIOTECA_H
 #define BIBLIOTECA_H
-#include "Livro.h"
-#include "Usuario.h"
-#include "Funcionario.h"
+#include "livro.h"
+#include "usuario.h"
+#include "funcionario.h"
 #include "PedidoReserva.h"
 #include <list>
 #include<vector>
