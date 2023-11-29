@@ -3,6 +3,7 @@
 
 #include "pessoa.h"
 #include "usuario.h"
+#include "pedidoreserva.h"
 
 class Biblioteca;
 class Usuario;

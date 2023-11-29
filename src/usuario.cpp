@@ -3,6 +3,8 @@
 //
 #include <iomanip>
 #include <unistd.h>
+#include <sstream>
+
 #include "usuario.h"
 #include "biblioteca.h"
 
@@ -187,6 +189,7 @@ void Usuario::cancelar_reserva() {
         }
     }
 }
+
 void Usuario::retirar_livro() {
     string s = mostrar_livros_reservados("retirar ");                                   //////////////////////
     if(s == "vazio"){ /// quando n tem livro reservado a funçao acima retorna "vazio"
