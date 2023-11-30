@@ -1,7 +1,3 @@
-//
-// Created by rayda on 31/10/2023.
-//
-
 #ifndef BIBLIOTECA_H
 #define BIBLIOTECA_H
 #include "livro.h"
@@ -13,7 +9,7 @@
 
 class Usuario;
 class Funcionario;
-//oi
+
 string menu2(vector<string>& opcao,  vector<string>& cabecalho);
 PedidoReserva* menu3(vector<PedidoReserva*>& opcao,  vector<string>& cabecalho);
 
@@ -50,4 +46,4 @@ public:
     bool verificar_existencia_livro(string id_livro);
 };
 
-#endif //ENTREGA1_BIBLIOTECA_H
+#endif //ENTREGA_FINAL_BIBLIOTECA_H

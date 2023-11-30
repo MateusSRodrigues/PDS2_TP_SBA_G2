@@ -1,7 +1,3 @@
-//
-// Created by rayda on 02/11/2023.
-//
-
 #include "pessoa.h"
 
 Pessoa::Pessoa(string n, string sen, string t, string id) : nome(n), senha(sen), telefone(t), identificacao(id) {

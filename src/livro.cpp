@@ -1,7 +1,3 @@
-//
-// Created by rayda on 02/11/2023.
-//
-
 #include <unistd.h>
 #include "livro.h"
 Livro::Livro(string nome, string autor, string id, string ef, string ano) : nome_livro(nome),autor(autor),  numero_id(id), estado_fisico(ef), ano_publicacao(ano), avaliacao(10), estado_emprestimo("Disponivel"){
@@ -54,7 +50,7 @@ void Livro::set_link(string novo_link) {
 }
 void Livro::mostrar_informacoes() {
     system("cls");
-    cout << "###############################################" << endl << "\033[0;35mInformacoes do livro.\033[0m" << endl << "-------------------------------------" << endl;
+    cout << "====================================" << endl << "\033[0;35mInformacoes do livro.\033[0m" << endl << "-------------------------------------" << endl;
     cout << "\033[0;35mNome : \033[0m \033[32m" << nome_livro << ".\033[0m" << endl << "\033[0;35mAutor: \033[0m \033[32m" << autor << ".\033[0m" << endl << "\033[0;35mAno de publicacao: \033[0m \033[32m";
     cout << ano_publicacao << ".\033[0m" << endl << "\033[0;35mAvaliacao: \033[0m \033[32m" << avaliacao << "/10.\033[0m" << endl << "\033[0;35mEstado fisico: \033[0m \033[32m" << estado_fisico << ".\033[0m" << endl;
     cout << "\033[0;35mEstado de emprestimo: \033[0m \033[32m" << estado_emprestimo << ".\033[0m"<< endl << "\033[0;35mLink: \033[0m" << link << endl;
@@ -64,7 +60,7 @@ void Livro::mostrar_informacoes() {
         cout << "\033[0;35mData de emprestimo: \033[0m \033[32m" << data_emprestimo.tm_mday << "/" << data_emprestimo.tm_mon + 1 << "/" << data_emprestimo.tm_year << ".\033[0m" << endl;
         cout << "\033[0;35mDevolucao prevista: \033[0m \033[32m" << data_vencimento.tm_mday << "/" << data_vencimento.tm_mon + 1 << "/" << data_vencimento.tm_year << ".\033[0m" << endl;
     }
-    cout << "###############################################" << endl << "###############################################" << endl;
+    cout << "====================================" << endl << "====================================" << endl;
 }
 void Livro::receber_avaliacao(int valor) {
     numero_avaliacoes++;

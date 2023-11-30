@@ -44,13 +44,8 @@ public:
     void prolonga_data_devolucao();
     void zerar_datas_livro();
 
-
     ~Livro();
-
-
-
-
 };
 
 
-#endif //SISTEMA_BIBLIOTECA_AVANÇADA_LIVRO_H
+#endif //ENTREGA_FINAL_LIVRO_H

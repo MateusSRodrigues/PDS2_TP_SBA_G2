@@ -28,8 +28,8 @@ public:
     void adicionar_aviso(string msg);
     void ler_avisos(Biblioteca* b);
     void adicionar_livro_reservado(Livro *l);
-    string mostrar_livros_reservados(string acao);     ///apaga o livro de reservas e manda para livros_em_uso- a string é para caso cancele a reserva ou caso retire o livro
-    string mostrar_livros_em_uso(string acao);     ///apaga o livro de reservas e manda para livros_em_uso - a string é para caso devolva o livro ou renove emprestimo
+    string mostrar_livros_reservados(string acao); //apaga o livro de reservas e manda para livros_em_uso- a string é para caso cancele a reserva ou caso retire o livro
+    string mostrar_livros_em_uso(string acao);    //apaga o livro de reservas e manda para livros_em_uso - a string é para caso devolva o livro ou renove emprestimo
     bool algum_livro_vencido();
     void reservar_livro(Biblioteca* b);
     void cancelar_reserva();
@@ -40,5 +40,4 @@ public:
     void atualizar();
 };
 
-
-#endif //ENTREGA1_USUARIO_H
+#endif //ENTREGA_FINAL_USUARIO_H

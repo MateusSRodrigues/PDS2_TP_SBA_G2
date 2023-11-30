@@ -1,7 +1,3 @@
-//
-// Created by rayda on 02/11/2023.
-//
-
 #include <unistd.h>
 #include <algorithm>
 #include "funcionario.h"
@@ -9,20 +5,20 @@
 Funcionario::Funcionario(string n, string sen, string t, string id, string turno) : Pessoa(n, sen, t, id) ,turno_trabalho(turno) {
 }
 void Funcionario::mostrar_informacoes_de_cadastro() {
-    cout << "###############################################" << endl;
+    cout << "===================================="<< endl;
     cout << "\033[0;35mSuas informacoes.\033[0m" << endl;
     cout << "------------------------" << endl;
     cout << "\033[0;35mNome: \033[0m\033[32m" << get_nome() << ".\033[0m" << endl;
     cout << "\033[0;35mIdentificacao: \033[0m\033[32m" << get_identificacao() << ".\033[0m" << endl;
     cout << "\033[0;35mTelefone: \033[0m\033[32m" << get_telefone() << ".\033[0m" << endl;
     cout << "\033[0;35mTurno de trabalho: \033[0m\033[32m" << turno_trabalho << ".\033[0m" << endl;
-    cout << "###############################################" << endl;
+    cout << "====================================" << endl;
 }
 void Funcionario::mostrar_informacoes_de_cadastro(Biblioteca *b1) {
     string identificacao;
     cout << "Insira a identificacao do usuario a ser buscado: ";
     cin >> identificacao;
-    if (identificacao.size() != 7 && identificacao.size() != 9) {              /////////////////////////////////////////////////////////
+    if (identificacao.size() != 7 && identificacao.size() != 9) {              
         throw invalid_argument("\033[1;31mO ID deve ter 7 ou 9 digitos.\033[0m");
     }
     if (!all_of(identificacao.begin(), identificacao.end(), [](char c) { return isdigit(c); })) {          // verifica se so tem numeros
@@ -30,7 +26,7 @@ void Funcionario::mostrar_informacoes_de_cadastro(Biblioteca *b1) {
     }
     if (b1->get_usuario(identificacao) == nullptr) {            // Verifica se o ID já existe na lista de usuários
         throw invalid_argument("\033[1;31mEsta Identificacao nao existe.\033[0m");
-    }                                                                                                       /////////////////////////////////////////////////////////////
+    }                                                                                                       
     b1->get_usuario(identificacao)->mostrar_informacoes_de_cadastro();
 }
 void Funcionario::cadastrar_livro(Biblioteca* b1) {
@@ -82,13 +78,13 @@ void Funcionario::descadastrar_livro(Biblioteca* b1) {
     cin >> ident;
     if (ident.size() != 8 or !all_of(ident.begin(), ident.end(), [](char c) { return isdigit(c); })) {          // verifica se so tem numeros
         throw invalid_argument("\033[1;31mA identificacao deve conter 8 digitos e apenas numeros.\033[0m");
-    }                                                                                                                                                /////////////////
+    }                                                                                                                                                
     b1->remover_livro(ident);
 }
 void Funcionario::dar_baixa_reserva(PedidoReserva *pr, Biblioteca* b1) {
-    if(pr == nullptr){                                                                                      ///////////////////////////
+    if(pr == nullptr){                                                                                      
         throw runtime_error ("\033[1;31mNao ha pedidos de reserva!\033[0m");
-    }else {                                                                                                       /////////////////////////
+    }else {                                                                                                       
         vector<string> opcao = {"Sim", "Nao"};
         vector<string> cabecalho_liberar = {"Deseja liberar reserva?"};
         if (menu2(opcao, cabecalho_liberar) == "Sim") {
@@ -105,9 +101,9 @@ void Funcionario::dar_baixa_reserva(PedidoReserva *pr, Biblioteca* b1) {
     }
 }
 void Funcionario::dar_baixa_renovar_emprestimo(PedidoReserva *pr, Biblioteca *b1) {
-    if (pr == nullptr) {                                                                                        //////////////
+    if (pr == nullptr) {                                                                                        
         throw runtime_error ("\033[1;31mNao ha pedidos de renovar emprestimo!\033[0m");
-    }                                                                                                           /////////////
+    }                                                                                                           
     vector<string> opcao = {"Sim", "Nao"};
     vector<string> cabecalho_renovar = {"Deseja liberar renovacao de emprestimo?"};
     if (menu2(opcao, cabecalho_renovar) == "Sim") {
@@ -140,6 +136,6 @@ void Funcionario::aceitar_devolucao_livro_presencialmente(Biblioteca *b1) {
 
     }
 }
-///-----------------------------------------------------------------------
+
 
 

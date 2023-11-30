@@ -1,5 +1,6 @@
 #ifndef PESSOA_H
 #define PESSOA_H
+
 #include <string>
 #include <iostream>
 #include "livro.h"
@@ -23,5 +24,4 @@ public:
     void avaliar_livro(Livro l);
 };
 
-
-#endif //ENTREGA1_PESSOA_H
+#endif //ENTREGA_FINAL_PESSOA_H

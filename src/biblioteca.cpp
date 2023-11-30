@@ -1,7 +1,3 @@
-///
-//
-// Created by rayda on 02/11/2023.
-
 #include <vector>
 #include <unistd.h>
 #include <iostream>
@@ -14,11 +10,13 @@
     #define CLEAR_SCREEN "cls"
     #include <conio.h>
     #define PEGCHAR _getch()
+
 #elif __linux__
     // Código específico para Linux
     #define CLEAR_SCREEN "clear"
     #include <termios.h>
     #define PEGCHAR getch()
+
     char getch() {
     char buf = 0;
     struct termios old = {0};
@@ -41,44 +39,42 @@
 #endif
 
 string menu2(vector<string>& opcao,  vector<string>& cabecalho){
-    //char n;
     int c = 0;
     for (int i = 0; i < cabecalho.size(); i++) {
         cout << cabecalho[i];
     }
-    cout << endl << "=================================="<< endl << "\033[34m"<< "->"<< "\033[0m";
+    cout << endl << "------------------------------"<< endl << "\033[34m"<< "->"<< "\033[0m";
     for (int i = 0; i < opcao.size(); i++) {
         if(i == 0){
             cout  << "\033[34m"<< opcao[i] << "\033[0m" << endl;
         }else
             cout  <<  opcao[i]  << endl;
     }
-    cout << "###############################"<< endl << "###############################" << endl;
+    cout << "===================================="<< endl << "===================================="<< endl;
     while (auto n = PEGCHAR) {
         system(CLEAR_SCREEN);
         switch (n) {
             case 's':
-                c++;              ///altera contador de click, desc a seta
+                c++;  //altera contador de click, desc a seta
                 break;
 
             case 'w':
-                c--;              ///altera contador de click,  sub a seta
+                c--;  //altera contador de click,  sub a seta
                 break;
 
-            //case '/n':
-            case 'd':             ///escolhe opçao
+            case 'd':   //escolhe opçao
                 if (c==0) {
                     return opcao[0];
                 }else
                     return opcao[c % opcao.size()];
         }
 
-        for (int i = 0; i < opcao.size(); i++) {        ///loop imprime a lista de opçoes
-            if (i == 0) {                           /// para i=0 limpa tela e impime cabeçalho
+        for (int i = 0; i < opcao.size(); i++) {    //loop imprime a lista de opçoes
+            if (i == 0) {                           // para i=0 limpa tela e impime cabeçalho
                 for (int i = 0; i < cabecalho.size(); i++) {
                     cout << cabecalho[i];
                 }
-                cout << endl << "=================================="<< endl;
+                cout << endl << "------------------------------"<< endl;
             }
             if (i == c % opcao.size()) {        /// calcula e imprime seta
                 cout << "->";
@@ -87,7 +83,7 @@ string menu2(vector<string>& opcao,  vector<string>& cabecalho){
                 cout << opcao[i]<< endl;
             }
             if (i == opcao.size()-1) {
-                cout << "#################################"<< endl << "#################################"<< endl;
+                cout << "===================================="<< endl << "===================================="<< endl;
             }
         }
     }
@@ -100,7 +96,7 @@ PedidoReserva* menu3(vector<PedidoReserva*>& opcao,  vector<string>& cabecalho, 
     for (int i = 0; i < cabecalho.size(); i++) {
         cout << cabecalho[i];
     }
-    cout << endl << "============================"<< endl << "->";
+    cout << endl << "------------------------------"<< endl << "->";
 
     for (int i = 0; i < opcao.size() ; i++) {
         if(i == 0){
@@ -108,46 +104,45 @@ PedidoReserva* menu3(vector<PedidoReserva*>& opcao,  vector<string>& cabecalho, 
         }else
             cout  << "Usuario: " <<  opcao[i]->identificacao_usuario << " pediu reserva do livro: "<< opcao[i]->livro_pedido->get_nome()<< " - disponiveis: "<< quant[i] << endl;
     }
-    cout << "###############################"<< endl << "###############################" << endl;
+    cout << "===================================="<< endl << "====================================" << endl;
     while (auto n = PEGCHAR) {
         system(CLEAR_SCREEN);
         switch (n) {
             case 's':
-                c++;              ///altera contador de click, desc a seta
+                c++;  //altera contador de click, desc a seta
                 break;
 
             case 'w':
-                c--;              ///altera contador de click,  sub a seta
+                c--;  //altera contador de click,  sub a seta
                 break;
 
-            //case '\n':
-            case 'd':            ///escolhe opçao
+            case 'd':  //escolhe opçao
                 if (c==0) {
                     return opcao[0];
                 }else
                     return opcao[c % opcao.size()];
         }
 
-        for (int i = 0; i < opcao.size(); i++) {        ///loop imprime a lista de opçoes
+        for (int i = 0; i < opcao.size(); i++) {   //loop imprime a lista de opçoes
             string disp = "Disponivel.";
             if(opcao[i]->livro_pedido->get_estado_emprestimo()!= "Disponivel"){
                 disp = "Indisponivel.";
             }
-            if (i == 0) {                           /// para i=0 limpa tela e impime cabeçalho
+            if (i == 0) {             // para i=0 limpa tela e impime cabeçalho
                 for (int i = 0; i < cabecalho.size(); i++) {
                     cout << cabecalho[i];
                 }
                 cout << endl << "============================"<< endl;
             }
-            if (i == c % opcao.size()) {        /// calcula e imprime seta
+            if (i == c % opcao.size()) {    // calcula e imprime seta
                 cout << "->";
                 cout  << "\033[34m" << "Usuario: " << opcao[i]->identificacao_usuario << " pediu reserva do livro: "<< opcao[i]->livro_pedido->get_nome()<< "- disponiveis: "<< quant[i]  << "\033[0m" << endl;
 
-            } else{                         /// imprime restante
+            } else{                // imprime restante
                 cout <<"Usuario: " << opcao[i]->identificacao_usuario << " pediu reserva do livro: "<< opcao[i]->livro_pedido->get_nome()<< "- disponiveis: "<< quant[i] << endl;
             }
             if (i == opcao.size()-1) {
-                cout << "###############################"<< endl << "###############################"<< endl;
+                cout << "===================================="<< endl << "===================================="<< endl;
             }
         }
     }
@@ -162,18 +157,18 @@ void Biblioteca::criar_funcionario(string n, string sen, string t, string id, st
     funcionarios.push_back(func);
 }
 void Biblioteca::adicionar_livro(Livro* novo_livro) {
-    bool existe = 0 ;    /// Verificar se já existe uma lista com um livro com este nome
+    bool existe = 0 ;    // Verificar se já existe uma lista com um livro com este nome
     for (auto& lista : todos_livros) {
         for (auto& livro_ptr : lista) {
             if (lista.front()->get_nome() == novo_livro->get_nome()) {   ///se ja existir um livro com esse nome, o livro criado é adicionado ao list dele.
                 existe = 1;
                 novo_livro->set_link(lista.front()->get_link());
-                lista.push_back(novo_livro);           /// Adicionar o novo livro à lista existente
+                lista.push_back(novo_livro);     // Adicionar o novo livro à lista existente
                 cout << "\033[32mEste livro foi adicionado a colecao com sucesso!\033[0m" << endl;
                 return;
             }
         }
-    }if (existe == 0) {        /// Se não existir uma lista com um livro com esse nome, criar uma nova lista e adicionar a nova lista à biblioteca
+    }if (existe == 0) {    // Se não existir uma lista com um livro com esse nome, criar uma nova lista e adicionar a nova lista à biblioteca
         //cria link
         const string caracteresPermitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         const int comprimentoLink = 10; // Comprimento do link desejado
@@ -190,7 +185,7 @@ void Biblioteca::adicionar_livro(Livro* novo_livro) {
     nova_lista.push_back(novo_livro);
     todos_livros.push_back(nova_lista);
     cout << "\033[32mEste livro foi adicionado ao acervo de livros da biblioteca com sucesso!\033[0m" << endl;
-    auto compararNomeDoPrimeiroLivro = [](const std::list<Livro*>& lista1, const std::list<Livro*>& lista2) {        /// comparar o nome dos primeiros livros
+    auto compararNomeDoPrimeiroLivro = [](const std::list<Livro*>& lista1, const std::list<Livro*>& lista2) {   // comparar o nome dos primeiros livros
         if (!lista1.empty() && !lista2.empty()) {
             return lista1.front()->get_nome() < lista2.front()->get_nome();
         }
@@ -379,11 +374,11 @@ PedidoReserva* Biblioteca::verificar_pedidos_reservas() {
     vector<PedidoReserva*> lista_pedidos_reserva;
     vector<int> quantidade;
     vector<string> cabecalho_pedidos_emprestimo = {"Lista de pedidos de emprestimo:"};
-    for (const auto &pedido: pedidos_reserva) {               ///roda os pedidso de reserva
-        lista_pedidos_reserva.push_back(pedido);                ///adiciona todos os pedidos de reserva a lista
+    for (const auto &pedido: pedidos_reserva) {       //roda os pedidso de reserva
+        lista_pedidos_reserva.push_back(pedido);      //adiciona todos os pedidos de reserva a lista
         quantidade.push_back(verifica_disponiblidade_exemplar(pedido->livro_pedido->get_nome()));
     }
-    PedidoReserva *pr = menu3(lista_pedidos_reserva, cabecalho_pedidos_emprestimo, quantidade);             ///a pessoa escolhe um pedido e retorna ele
+    PedidoReserva *pr = menu3(lista_pedidos_reserva, cabecalho_pedidos_emprestimo, quantidade);   //a pessoa escolhe um pedido e retorna ele
     return pr;
 }
 PedidoReserva* Biblioteca::verificar_pedidos_renovar_emprestimo(){
@@ -400,20 +395,20 @@ PedidoReserva* Biblioteca::verificar_pedidos_renovar_emprestimo(){
     vector<PedidoReserva*> lista_pedidos_renovar_emprestimo;
     vector<int> quantidade;
     vector<string> cabecalho_renovar_emprestimo = {"Lista de pedidos para renovar emprestimo:"};
-    for (const auto &pedido: pedidos_renovar_emprestimo) {               ///roda os pedidso de reserva
+    for (const auto &pedido: pedidos_renovar_emprestimo) {      //roda os pedidso de reserva
         if (pedido->renovado == false){
-            lista_pedidos_renovar_emprestimo.push_back(pedido);                ///adiciona todos os pedidos de reserva a lista
+            lista_pedidos_renovar_emprestimo.push_back(pedido);  //adiciona todos os pedidos de reserva a lista
             quantidade.push_back(verifica_disponiblidade_exemplar(pedido->livro_pedido->get_nome()));
         }
     }
-    PedidoReserva *pr = menu3(lista_pedidos_renovar_emprestimo, cabecalho_renovar_emprestimo, quantidade);             ///a pessoa escolhe um pedido e retorna ele
+    PedidoReserva *pr = menu3(lista_pedidos_renovar_emprestimo, cabecalho_renovar_emprestimo, quantidade);    //a pessoa escolhe um pedido e retorna ele
     return pr;
 }
 void Biblioteca::dar_baixa_reserva_sistema(PedidoReserva *pr) {
     for ( auto& lista : todos_livros) {
         for ( auto& livro : lista) {
             if(pr->livro_pedido->get_nome() == livro->get_nome() && livro->get_estado_emprestimo() == "Disponivel"){
-                for (const auto &usuario: usuarios) {                                 /// roda a lista de usuarios procurando o que tem matricula igual a do pedido.
+                for (const auto &usuario: usuarios) {              // roda a lista de usuarios procurando o que tem matricula igual a do pedido.
                     if (usuario->get_identificacao() == pr->identificacao_usuario) {
                         livro->set_data_reserva(pr->data_pedido);
                         usuario->adicionar_livro_reservado(livro);
@@ -421,16 +416,16 @@ void Biblioteca::dar_baixa_reserva_sistema(PedidoReserva *pr) {
                                      " foi aceito. Voce tem 72h para retira-lo.";
                         usuario->adicionar_aviso(msg);
                         livro->set_estado_emprestimo("Reservado");
-                        if (verifica_disponiblidade_exemplar(pr->livro_pedido->get_nome()) == 0) {          ///se nao hoverem mais exemplares disponiveis.
+                        if (verifica_disponiblidade_exemplar(pr->livro_pedido->get_nome()) == 0) {   //se nao hoverem mais exemplares disponiveis.
                             ///enviar mensagem para os usuarios avisando que nao ha exemplares disponiveis e perguntar se permanecerao na lista de espera.
-                            for (const auto &pedido: pedidos_reserva) {                     ///roda a lista de pedidos de reserva
+                            for (const auto &pedido: pedidos_reserva) {       //roda a lista de pedidos de reserva
                                 int numero_espera = 0;
-                                if (pr->livro_pedido->get_nome() == pedido->livro_pedido->get_nome()) {             ///se achar um pedido com o mesmo nome do do livro escolhido
+                                if (pr->livro_pedido->get_nome() == pedido->livro_pedido->get_nome()) {      //se achar um pedido com o mesmo nome do do livro escolhido
                                     for (const auto &usuario2: usuarios) {                           ///roda os usuarios
                                         if (usuario2->get_identificacao() != pr->identificacao_usuario) {
                                             if (pedido->identificacao_usuario !=
-                                                usuario2->get_identificacao()) {                   /// se o pedido tiver a matricula diferente da do usuario achado
-                                                numero_espera++;                                                        /// ja que o livro tem o mesmo nome e o usuario é diferente adiciona 1
+                                                usuario2->get_identificacao()) {   // se o pedido tiver a matricula diferente da do usuario achado
+                                                numero_espera++;                   // ja que o livro tem o mesmo nome e o usuario é diferente adiciona 1
                                             }
                                             if (usuario2->get_identificacao() == pedido->identificacao_usuario) {
                                                 string msg;
