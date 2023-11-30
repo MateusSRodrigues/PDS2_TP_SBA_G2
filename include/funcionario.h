@@ -14,7 +14,7 @@ class Funcionario: public Pessoa {
 private:
     string turno_trabalho;
 public:
-//    void adicionar_na_lista_pedidos_reserva(PedidoReserva* pr);
+    //void adicionar_na_lista_pedidos_reserva(PedidoReserva* pr);
     Funcionario(string n, string sen, string t, string id, string turno);
     void mostrar_informacoes_de_cadastro() override;
     void mostrar_informacoes_de_cadastro(Biblioteca* b1);

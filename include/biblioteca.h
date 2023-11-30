@@ -1,5 +1,6 @@
 #ifndef BIBLIOTECA_H
 #define BIBLIOTECA_H
+
 #include "livro.h"
 #include "usuario.h"
 #include "funcionario.h"
@@ -9,7 +10,7 @@
 
 class Usuario;
 class Funcionario;
-//oi
+
 string menu2(vector<string>& opcao,  vector<string>& cabecalho);
 PedidoReserva* menu3(vector<PedidoReserva*>& opcao,  vector<string>& cabecalho);
 

@@ -1,7 +1,6 @@
 #ifndef PROJETOBIBLIOTECA_PEDIDORESERVA_H
 #define PROJETOBIBLIOTECA_PEDIDORESERVA_H
 
-
 #include <algorithm>
 #include "livro.h"
 
@@ -14,5 +13,4 @@ public:
     tm data_pedido;
 };
 
-
-#endif //PROJETOBIBLIOTECA_PEDIDORESERVA_H
+#endif //ENTREGA_FINAL_PEDIDORESERVA_H

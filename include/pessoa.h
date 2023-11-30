@@ -1,5 +1,6 @@
 #ifndef PESSOA_H
 #define PESSOA_H
+
 #include <string>
 #include <iostream>
 #include "livro.h"
@@ -22,6 +23,5 @@ public:
     virtual void mostrar_informacoes_de_cadastro() = 0;
     void avaliar_livro(Livro l);
 };
-
 
 #endif //ENTREGA_FINAL_PESSOA_H
