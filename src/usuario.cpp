@@ -1,6 +1,3 @@
-//
-// Created by rayda on 02/11/2023.
-//
 #include <iomanip>
 #include <unistd.h>
 #include <sstream>
@@ -13,7 +10,7 @@ Usuario::Usuario(string n, string sen, string t, string id) : Pessoa(n, sen, t, 
 }
 void Usuario::mostrar_informacoes_de_cadastro() {
     cout << setprecision(2) << fixed;
-    cout << "###############################################" << endl << "\033[0;35mSuas informacoes.\033[0m" << endl << "-----------------------------" << endl;
+    cout << "====================================" << endl << "\033[0;35mSuas informacoes.\033[0m" << endl << "-----------------------------" << endl;
     cout << "\033[0;35mNome: \033[0m \033[32m" << get_nome() << ".\033[0m" << endl << "\033[0;35mIdentificacao: \033[0m \033[32m" << get_identificacao() << ".\033[0m" << endl;
     cout << "\033[0;35mTipo de usuario: \033[0m \033[32m";
     if(get_identificacao().size() == 9){cout<< "Aluno.\033[0m" << endl;}
@@ -28,7 +25,7 @@ void Usuario::mostrar_informacoes_de_cadastro() {
     }
     cout << "\033[0;35mLivro(s) em posse:  \033[0m";
     ver_livros_emprestados();
-    cout << "###############################################" << endl;
+    cout << "====================================" << endl;
 }
 float Usuario::get_valor_multa() {
     return valor_multa;

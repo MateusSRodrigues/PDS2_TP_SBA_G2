@@ -77,7 +77,7 @@ void cadastrar(Biblioteca* b){
 int main() {
     char click;
     string instrucoes = "\033[33mUse \"w\" para subir, \"s\" para descer e \"d\" para escolher.\n";
-    string divisao = "-----------------------------------------------------------------------------------------------------------\n\033[0m";
+    string divisao = "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\033[0m";
     Biblioteca *b = new Biblioteca();
     vector<string> cabecalho = {instrucoes, divisao ,"Seja bem-vindo ao sistema de biblioteca avancado, para comecar basta entrar na sua conta, caso nao possua cadastro clique em \"Cadastrar\"."};
     vector<string> opcoes = {"Entrar.", "Cadastrar."};

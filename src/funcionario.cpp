@@ -1,7 +1,3 @@
-//
-// Created by rayda on 02/11/2023.
-//
-
 #include <unistd.h>
 #include <algorithm>
 #include "funcionario.h"
@@ -9,14 +5,14 @@
 Funcionario::Funcionario(string n, string sen, string t, string id, string turno) : Pessoa(n, sen, t, id) ,turno_trabalho(turno) {
 }
 void Funcionario::mostrar_informacoes_de_cadastro() {
-    cout << "###############################################" << endl;
+    cout << "===================================="<< endl;
     cout << "\033[0;35mSuas informacoes.\033[0m" << endl;
     cout << "------------------------" << endl;
     cout << "\033[0;35mNome: \033[0m\033[32m" << get_nome() << ".\033[0m" << endl;
     cout << "\033[0;35mIdentificacao: \033[0m\033[32m" << get_identificacao() << ".\033[0m" << endl;
     cout << "\033[0;35mTelefone: \033[0m\033[32m" << get_telefone() << ".\033[0m" << endl;
     cout << "\033[0;35mTurno de trabalho: \033[0m\033[32m" << turno_trabalho << ".\033[0m" << endl;
-    cout << "###############################################" << endl;
+    cout << "====================================" << endl;
 }
 void Funcionario::mostrar_informacoes_de_cadastro(Biblioteca *b1) {
     string identificacao;

@@ -29,4 +29,4 @@ public:
 };
 
 
-#endif //ENTREGA1_FUNCIONARIO_H
+#endif //ENTREGA_FINAL_FUNCIONARIO_H

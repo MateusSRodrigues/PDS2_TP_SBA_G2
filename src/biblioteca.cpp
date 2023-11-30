@@ -1,7 +1,3 @@
-///
-//
-// Created by rayda on 02/11/2023.
-
 #include <vector>
 #include <unistd.h>
 #include <iostream>
@@ -14,6 +10,7 @@
     #define CLEAR_SCREEN "cls"
     #include <conio.h>
     #define PEGCHAR _getch()
+
 #elif __linux__
     // Código específico para Linux
     #define CLEAR_SCREEN "clear"
@@ -46,14 +43,14 @@ string menu2(vector<string>& opcao,  vector<string>& cabecalho){
     for (int i = 0; i < cabecalho.size(); i++) {
         cout << cabecalho[i];
     }
-    cout << endl << "=================================="<< endl << "\033[34m"<< "->"<< "\033[0m";
+    cout << endl << "------------------------------"<< endl << "\033[34m"<< "->"<< "\033[0m";
     for (int i = 0; i < opcao.size(); i++) {
         if(i == 0){
             cout  << "\033[34m"<< opcao[i] << "\033[0m" << endl;
         }else
             cout  <<  opcao[i]  << endl;
     }
-    cout << "###############################"<< endl << "###############################" << endl;
+    cout << "===================================="<< endl << "===================================="<< endl;
     while (auto n = PEGCHAR) {
         system(CLEAR_SCREEN);
         switch (n) {
@@ -78,7 +75,7 @@ string menu2(vector<string>& opcao,  vector<string>& cabecalho){
                 for (int i = 0; i < cabecalho.size(); i++) {
                     cout << cabecalho[i];
                 }
-                cout << endl << "=================================="<< endl;
+                cout << endl << "------------------------------"<< endl;
             }
             if (i == c % opcao.size()) {        /// calcula e imprime seta
                 cout << "->";
@@ -87,7 +84,7 @@ string menu2(vector<string>& opcao,  vector<string>& cabecalho){
                 cout << opcao[i]<< endl;
             }
             if (i == opcao.size()-1) {
-                cout << "#################################"<< endl << "#################################"<< endl;
+                cout << "===================================="<< endl << "===================================="<< endl;
             }
         }
     }
@@ -100,7 +97,7 @@ PedidoReserva* menu3(vector<PedidoReserva*>& opcao,  vector<string>& cabecalho, 
     for (int i = 0; i < cabecalho.size(); i++) {
         cout << cabecalho[i];
     }
-    cout << endl << "============================"<< endl << "->";
+    cout << endl << "------------------------------"<< endl << "->";
 
     for (int i = 0; i < opcao.size() ; i++) {
         if(i == 0){
@@ -108,7 +105,7 @@ PedidoReserva* menu3(vector<PedidoReserva*>& opcao,  vector<string>& cabecalho, 
         }else
             cout  << "Usuario: " <<  opcao[i]->identificacao_usuario << " pediu reserva do livro: "<< opcao[i]->livro_pedido->get_nome()<< " - disponiveis: "<< quant[i] << endl;
     }
-    cout << "###############################"<< endl << "###############################" << endl;
+    cout << "===================================="<< endl << "====================================" << endl;
     while (auto n = PEGCHAR) {
         system(CLEAR_SCREEN);
         switch (n) {
@@ -147,7 +144,7 @@ PedidoReserva* menu3(vector<PedidoReserva*>& opcao,  vector<string>& cabecalho, 
                 cout <<"Usuario: " << opcao[i]->identificacao_usuario << " pediu reserva do livro: "<< opcao[i]->livro_pedido->get_nome()<< "- disponiveis: "<< quant[i] << endl;
             }
             if (i == opcao.size()-1) {
-                cout << "###############################"<< endl << "###############################"<< endl;
+                cout << "===================================="<< endl << "===================================="<< endl;
             }
         }
     }
