@@ -1,11 +1,14 @@
 #ifndef BIBLIOTECA_H
 #define BIBLIOTECA_H
+
+#include <list>
+#include <vector>
+
 #include "livro.h"
 #include "usuario.h"
 #include "funcionario.h"
 #include "pedidoreserva.h"
-#include <list>
-#include <vector>
+#include "funcoes.h"
 
 class Usuario;
 class Funcionario;
