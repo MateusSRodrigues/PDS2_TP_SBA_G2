@@ -39,7 +39,7 @@ public:
     static bool verificar_existencia_pedido(string matricula, Livro* l, list<PedidoReserva*> lista_pedidos);
     void ver_informacoes_livro() const;
     Livro* mostrar_exemplar_todos_livros();
-    PedidoReserva* verificar_pedidos_reservas();// escolhe o pedido da lista de reserva ou a de renovar reserva depedendo da string lista
+    PedidoReserva* verificar_pedidos_reservas();
     PedidoReserva* verificar_pedidos_renovar_emprestimo();
     void dar_baixa_reserva_sistema(PedidoReserva *pr);
     void dar_baixa_renovar_emprestimo_sistema(PedidoReserva *pr);
