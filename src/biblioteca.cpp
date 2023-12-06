@@ -16,7 +16,7 @@ void Biblioteca::adicionar_livro(Livro* novo_livro) {
     bool existe = 0 ;    // Verificar se já existe uma lista com um livro com este nome
     for (auto& lista : todos_livros) {
         for (auto& livro_ptr : lista) {
-            if (lista.front()->get_nome() == novo_livro->get_nome()) {   ///se ja existir um livro com esse nome, o livro criado é adicionado ao list dele.
+            if (lista.front()->get_nome() == novo_livro->get_nome()) {   ///Se ja existir um livro com esse nome, o livro criado é adicionado ao list dele.
                 existe = 1;
                 novo_livro->set_link(lista.front()->get_link());
                 lista.push_back(novo_livro);     // Adicionar o novo livro à lista existente
@@ -24,7 +24,7 @@ void Biblioteca::adicionar_livro(Livro* novo_livro) {
                 return;
             }
         }
-    }if (existe == 0) {    // Se não existir uma lista com um livro com esse nome, criar uma nova lista e adicionar a nova lista à biblioteca
+    }if (existe == 0) {        /// Se não existir uma lista com um livro com esse nome, criar uma nova lista e adicionar a nova lista à biblioteca
         //cria link
         const string caracteresPermitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         const int comprimentoLink = 10; // Comprimento do link desejado
@@ -41,11 +41,11 @@ void Biblioteca::adicionar_livro(Livro* novo_livro) {
     nova_lista.push_back(novo_livro);
     todos_livros.push_back(nova_lista);
     cout << "\033[32mEste livro foi adicionado ao acervo de livros da biblioteca com sucesso!\033[0m" << endl;
-    auto compararNomeDoPrimeiroLivro = [](const std::list<Livro*>& lista1, const std::list<Livro*>& lista2) {   // comparar o nome dos primeiros livros
+    auto compararNomeDoPrimeiroLivro = [](const std::list<Livro*>& lista1, const std::list<Livro*>& lista2) {   /// Comparar o nome dos primeiros livros
         if (!lista1.empty() && !lista2.empty()) {
             return lista1.front()->get_nome() < lista2.front()->get_nome();
         }
-        return false; // ou defina a lógica para lidar com listas vazias, se necessário
+        return false; 
     };
     todos_livros.sort(compararNomeDoPrimeiroLivro);     /// Ordenar a lista de listas com base no comparador personalizado
 }
