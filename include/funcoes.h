@@ -9,7 +9,7 @@
 
 using namespace std;
 
-//class Biblioteca;
+class Biblioteca;
 
 string menu2(vector<string>& opcao,  vector<string>& cabecalho);
 PedidoReserva* menu3(vector<PedidoReserva*>& opcao,  vector<string>& cabecalho, vector<int>& quant);
