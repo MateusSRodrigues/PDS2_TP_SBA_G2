@@ -44,7 +44,9 @@ Este sistema visa simplificar e agilizar o gerenciamento de uma biblioteca, melh
 ## Cartão CRC
 
 https://drive.google.com/file/d/1Cx5NkLtnsqqZ5Ss5SC3d4EOU6NWmZykV/view?usp=drive_link
-///explicar mudanças
+Mudanças:
+A função avaliar livro foi colocada dentro da função devolver livro para que a avaliação do membro fosse fixada pelo funcionario.
+As funções ver multa e pagar multa foram retiradas da Biblioteca pois fazia mais sentido deixa-las em Usuario e Funcionario já que seriam diferentes pra cada.
 
  ## Pré-requisitos
   Para usar o sistema é preciso ter um compilador de C++ e makefile
@@ -54,53 +56,12 @@ Esse projeto utiliza as seguintes linguagem, ferramentas e bibliotecas:
 
 * Linguagem: [C++11](https://cplusplus.com/doc/)
 * Compilação: [Make](https://www.gnu.org/software/make/)
-* Documentação: [Doxygen](https://doxygen.nl/)
-* Testes Unitários: [Doctest](https://github.com/doctest/doctest)
-* Cobertura: [gcovr](https://gcovr.com/)
 
 ## **Compilação**
 
 ```bash
 $ make
 ```
-
-**Atenção: Criar antes um diretório _./build/_** (mkdir build)
-
-## **Execução**
-
-```bash
-$ make run
-```
-
-## **Compilação Testes**
-
-```bash
-$ make tests
-```
-
-## **Execução Testes**
-
-```bash
-$ make run_tests
-```
-
-## **Relatório de Cobertura**
-
-Para imprimir o relatório simplificado no próprio Terminal, utilizar:
-```bash
-$ make coverage
-```
-
-Para gerar o relatório em HTML, utilizar:
-```bash
-$ make html_coverage
-```
-## **Remover arquivos auxiliares**
-```bash
-$ make clean
-```
-
-
 
 
 
