@@ -35,7 +35,7 @@ public:
     void deletar_pedido_renovar_emprestimo(string identificaçao, string nome_livro);
     Usuario* get_usuario(string identificacao);
     Funcionario* get_funcionario(string identificacao);
-    void ordenar_lista_pedidos(string lista); // ordena a lista de reserva ou a de renovar reserva depedendo da string lista
+    void ordenar_lista_pedidos(string lista); 
     static bool verificar_existencia_pedido(string matricula, Livro* l, list<PedidoReserva*> lista_pedidos);
     void ver_informacoes_livro() const;
     Livro* mostrar_exemplar_todos_livros();
