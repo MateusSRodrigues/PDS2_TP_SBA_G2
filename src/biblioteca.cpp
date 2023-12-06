@@ -149,7 +149,7 @@ Funcionario* Biblioteca::get_funcionario(string identificacao){
     }
     return nullptr;
 }
-void Biblioteca::ordenar_lista_pedidos(string lista) {  /// lista = a "reservas" oiu "renovar reservas"
+void Biblioteca::ordenar_lista_pedidos(string lista) {  /// ordena a lista de reserva ou a de renovar reserva depedendo da string lista.
     // Defina um comparador personalizado para a função sort
     auto comparador = [](const PedidoReserva* pr1, const PedidoReserva* pr2) {
         if (pr1->identificacao_usuario.size() != pr2->identificacao_usuario.size()) {           /// Comparação pelo tamanho da matrícula
