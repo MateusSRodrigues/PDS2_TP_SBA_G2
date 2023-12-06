@@ -17,27 +17,23 @@
 
 O sistema de Biblioteca Avançado é uma aplicação de software que abrange todas as operações-chave de uma biblioteca, tanto para membros quanto para funcionários. Sua estrutura geral compreende:
 
-* Cadastro de Usuário: Os membros da biblioteca, incluindo professores e alunos, podem se cadastrar e fazer login em suas contas. Isso permite que eles acessem serviços e informações personalizadas.
+* Cadastro de Usuário: Os membros da biblioteca (funcionarios, professores e alunos), podem se cadastrar e fazer login em suas contas. Isso permite que eles acessem serviços e informações personalizadas. O cadastro pede nome completo, identificação, telefone e senha, para funcionarios ainda é pedido o turno de trabalho. A diferneciação de cadastro é feita pela identificação (5 numeros correspode a funcionario, 7 é professor e 9 é aluno).
 
 * Pesquisa de Livros: Os usuários podem pesquisar livros por título, autor, categoria ou palavra-chave, tornando a busca por materiais de leitura mais eficiente.
 
-* Reserva de Livros: Membros da biblioteca podem reservar livros online, verificando a disponibilidade, recebendo confirmações e lembranças das datas de retirada.
+* Reserva de Livros: Professores e alunos podem pedir para reservar livros de maneira online, verificando a disponibilidade, se o funcionario da biblioteca aprovar a reserva é enviada a confirmação e lembrança da data limite de retirada, caso o membro desista da reserva ela poderá ser cancelada.
 
-* Retirada de Livros Online: Oferece a opção de retirar livros sem passar pelo balcão da biblioteca, economizando tempo.
+* Retirada de Livros Online: Oferece a opção de ter acesso ao link do pdf dos livros sem passar pelo balcão da biblioteca e nem precisando de reserva, economizando tempo.
 
-* Retirada de Livros Presencial: Funcionários podem gerenciar empréstimos presencialmente, verificar a disponibilidade, identificar usuários e gerar recibos.
+* Retirada de Livros Presencial: Funcionários são responsaveis por realizar empréstimos presencialmente, apenas inserindo a identificação do membro e dando baixa no emprestimo dele, é enviada ao membro a confirmação e lembrança da data limite de devolução.
 
-* Devolução de Livros Presencial: Funcionários podem receber devoluções, verificar datas, aplicar multas, atualizar o status do livro e fornecer comprovantes de devolução.
+* Devolução de Livros Presencial: Funcionários são responsaveis por receber devoluções, apenas inserindo a identificação do membro e dando baixa na devolução e atualizando o status do livro e adicionar a lançando a avaliação do livro, feita pelo membro.
 
-* Renovação de Empréstimo: Membros podem renovar empréstimos online, desde que não haja reservas pendentes.
+* Renovação de Empréstimo: Membros podem pedir para renovar empréstimos online, no entanto não podem renovar mais de uma vez seguida o mesmo livro e não podem realizar o pedido caso esteja devendo a biblioteca, o pedido poderá ser aceito ou negado por um funcionário.
 
-* Avaliação de Livros (Opcional): Membros podem atribuir classificações a livros e ver as classificações de outros membros ao pesquisar no catálogo.
+* Gerenciamento de Multas: Funcionários podem ver as multas de qualquer membro ao pesquisar pela identificação dele nas informaçoes de ususario, eles também podem dar baixa no pagamento das multas ao receber presencialmente.
 
-* Gerenciamento de Multas: Funcionários podem gerenciar multas, incluindo notificações, registro de pagamento e geração de relatórios.
-
-* Reserva de Salas de Estudo (Opcional): Membros podem reservar salas de estudo online, com confirmações e opções de cancelamento.
-
-* Cadastro de Novos Livros: Funcionários podem cadastrar novos livros com informações detalhadas, incluindo título, autor, editora, ISBN e disponibilidade inicial.
+* Cadastro de Novos Livros: Funcionários podem cadastrar novos livros com informações detalhadas, incluindo título, autor, identificação, estado fisico e ano.
 
 Este sistema visa simplificar e agilizar o gerenciamento de uma biblioteca, melhorar a experiência dos usuários e fornecer uma solução completa para as necessidades em constante evolução de bibliotecas modernas. A combinação de funcionalidades online e presenciais o torna uma ferramenta valiosa para qualquer instituição que deseje oferecer serviços de biblioteca mais eficientes e convenientes.
 
@@ -48,6 +44,7 @@ Este sistema visa simplificar e agilizar o gerenciamento de uma biblioteca, melh
 ## Cartão CRC
 
 https://drive.google.com/file/d/1Cx5NkLtnsqqZ5Ss5SC3d4EOU6NWmZykV/view?usp=drive_link
+///explicar mudanças
 
  ## Pré-requisitos
   Para usar o sistema é preciso ter um compilador de C++ e makefile
